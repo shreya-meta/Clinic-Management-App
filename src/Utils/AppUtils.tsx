@@ -1,2 +1,2 @@
 import { createContext } from "react";
-export const ReferenceContext = createContext<string>("");
+export const AppContext = createContext<any>("");

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
@@ -10,25 +10,36 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
+  useStyles,
 } from "../LayoutStyles";
 import { clinicSidebarData } from "./SidebarData";
+import { AppContext } from "../../../Utils/AppUtils";
+import { Grid } from "@mui/material";
 
-const SidebarMenu = ({ open }: any) => {
+const SidebarMenu = () => {
+  const { open } = useContext(AppContext);
   const isSuperuser = true;
   const [search, setSearch] = useState("");
+  const classes = useStyles();
   return (
     <Drawer variant="permanent" open={open}>
-      <div>
-        <div className="sidebar__logo">
-          {open && <Typography variant="h6">CLINIC MGT</Typography>}
-        </div>
-      </div>
+      <>
+        {open && (
+          <Typography
+            variant="h6"
+            color="common.white"
+            sx={{ lineHeight: "3.1", fontFamily: "system-ui" }}
+          >
+            CLINIC MGT
+          </Typography>
+        )}
+      </>
       <Divider />
       <List component="nav" disablePadding>
         <ListItem>
           {open && (
-            <div>
-              <Search className="search-wrapper-sidebar">
+            <Grid className={classes.searchSidebar}>
+              <Search>
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
@@ -36,11 +47,8 @@ const SidebarMenu = ({ open }: any) => {
                     setSearch(e.target.value);
                   }}
                 />
-                <SearchIconWrapper className="search-icon-wrapper">
-                  <SearchIcon style={{ color: "#f2f2f2" }} />
-                </SearchIconWrapper>
               </Search>
-            </div>
+            </Grid>
           )}
         </ListItem>
         {clinicSidebarData?.map((item: any, index: number) => {

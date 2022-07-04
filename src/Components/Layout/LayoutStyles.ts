@@ -15,6 +15,9 @@ export const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
   },
+  // searchSidebar: {
+  //   width: "38%",
+  // },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
     minHeight: "46px",
@@ -32,10 +35,6 @@ export const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     paddingBottom: "24px",
     paddingTop: "24px",
-  },
-
-  Top_Appbar: {
-    background: "linear-gradient(93deg, #305bb3 30%, #2f59b2 90%)",
   },
   menuButton: {
     // margin: "0 0 0 18px",
@@ -63,11 +62,11 @@ export const useStyles = makeStyles(() => ({
     overflow: "auto",
     flexDirection: "column",
   },
-  fixedHeight: {
-    height: 240,
-  },
   sidebarList: {
     color: "white",
+  },
+  sidebar: {
+    height: "100vh",
   },
   ListItemhover: {
     "&:hover": {
@@ -76,7 +75,7 @@ export const useStyles = makeStyles(() => ({
     },
   },
   subMenuPadding: {
-    paddingLeft: "30px !important",
+    paddingLeft: "50px !important",
     "&:hover": {
       backgroundColor: "#94c1d4",
       color: "#fff",
@@ -107,7 +106,7 @@ export const useStyles = makeStyles(() => ({
   searchAppbar: {
     position: "relative",
     backgroundColor: "#f5fcff",
-    borderRadius: "4px",
+    borderRadius: "10px",
     "&:hover": {
       borderColor: "#a4adb2",
     },
@@ -118,23 +117,15 @@ export const useStyles = makeStyles(() => ({
     margin: 9,
   },
   searchSidebar: {
-    position: "relative",
-    margin: 9,
-    borderRadius: "4px",
-    "&:hover": {
-      borderColor: "#a4adb2",
-    },
-    padding: "2px",
+    width: " 200px",
+    height: "35px",
   },
   badgeIcons: {
     position: "relative",
     marginTop: 12,
   },
-  notificationIcon: {
-    color: "#305bb3",
-  },
   accountIcon: {
-    color: "#305bb3",
+    color: "#2f8ca7",
   },
   logo: {
     maxWidth: 50,
@@ -153,15 +144,15 @@ export const useStyles = makeStyles(() => ({
   },
   menuLink: {
     textDecoration: "none",
-    color: "#305bb3",
+    color: "#2f8ca7",
   },
 }));
-
+//style for app bar
 export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer,
-  backgroundColor: "rgba(235, 235, 235, 0.87)",
+  backgroundColor: "rgb(0 0 0 / 12%)",
   color: "rgba(0,0,0,0.87)",
   width: `calc(100% - ${theme.spacing(5.5)} + 1px)`,
   transition: theme.transitions.create(["margin", "width"], {
@@ -206,31 +197,32 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
-
+//when drawer is open
 const openedMixin = (theme: Theme): CSSObject => ({
   position: "relative",
   overflowX: "hidden",
   whiteSpace: "nowrap",
-  background: "linear-gradient(93deg, #305bb3 30%, #2f59b2 90%)",
+  background: "linear-gradient(93deg, #4694a0 30%, #2f8ca7 90%);",
   borderRight: "none !important",
+  height: "100vh",
   width: drawerWidth,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.easeOut,
     duration: 320,
   }),
 });
-
+//when drawer is closed
 const closedMixin = (theme: Theme): CSSObject => ({
   position: "relative",
   overflowX: "hidden",
   width: `calc(${theme.spacing(5.5)} + 1px)`,
-  background: "linear-gradient(93deg, #305bb3 30%, #2f59b2 90%)",
+  background: "linear-gradient(93deg, #4694a0 30%, #2f8ca7 90%);",
+  height: "100vh",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.easeOut,
     duration: 320,
   }),
 });
-
 export const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -247,13 +239,13 @@ export const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
+//search
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: "10px",
+  backgroundColor: alpha(theme.palette.common.white, 0.75),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.65),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -267,13 +259,13 @@ export const Search = styled("div")(({ theme }) => ({
 export const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
+  color: "#9d8e8ef5",
   position: "absolute",
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 }));
-
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -282,6 +274,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    height: "1rem",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },

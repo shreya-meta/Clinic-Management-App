@@ -9,7 +9,7 @@ import {
   Divider,
   List,
   ListItemIcon,
-  ListItemText,
+  Typography,
 } from "@mui/material";
 import { useStyles } from "../LayoutStyles";
 import MenuItemList from "./MenuItemList";
@@ -33,8 +33,7 @@ export type AppMenuItemProps = AppMenuItemPropsWithoutItems & {
   setOpenSubMenu: Dispatch<SetStateAction<boolean>>;
 };
 const Sidebar: React.FC<AppMenuItemProps> = (props) => {
-  let showSubMenu: any;
-  const { name, link, Icon, items, className, search = "" } = props;
+  const { name, link, Icon, items, search = "" } = props;
   const classes = useStyles();
   const isExpandable = items && items.length > 0;
   const [openSubMenu, setOpenSubMenu] = useState(false);
@@ -43,7 +42,7 @@ const Sidebar: React.FC<AppMenuItemProps> = (props) => {
     <>
       {search === "" ? (
         <MenuItemList
-          className={className}
+          className={classes.Iconbg}
           link={link}
           onClick={() => {
             setOpenSubMenu(!openSubMenu);
@@ -55,8 +54,8 @@ const Sidebar: React.FC<AppMenuItemProps> = (props) => {
               <Icon className={classes.SidebarIcon} />
             </ListItemIcon>
           )}
-          {/* for displaying of name in sidebar */}
-          {<ListItemText primary={name} />}
+          {/* for displaying  name in sidebar */}
+          {<Typography sx={{ fontSize: "14px" }}>{name}</Typography>}
           {/* Display the expand menu if the item has children */}
           {isExpandable && !openSubMenu && <ExpandMoreIcon />}
           {isExpandable && openSubMenu && <ExpandLessIcon />}
@@ -87,7 +86,6 @@ const Sidebar: React.FC<AppMenuItemProps> = (props) => {
           <Divider />
           <List component="div" className={classes.sidebarList}>
             {items.map((item: any, index: number) => {
-              const { permission } = item;
               return isSuperuser ? (
                 <Fragment key={index}>
                   <Sidebar
