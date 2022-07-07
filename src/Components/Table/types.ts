@@ -10,3 +10,4 @@ export interface TableData {
   name: string;
   protein: number;
 }
+export type Order = "asc" | "desc";

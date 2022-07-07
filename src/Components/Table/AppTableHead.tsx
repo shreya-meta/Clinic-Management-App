@@ -1,9 +1,12 @@
+import { memo } from "react";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import { Box, TableRow, TableSortLabel } from "@mui/material";
 import { TableData, TableHeadProps } from "./types";
-import { MouseEvent } from "react";
+import { MouseEvent, useContext } from "react";
+import { AppContext } from "../../Utils/AppUtils";
 const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
+  const { columns, orderBy, order } = useContext(AppContext);
   const createSortHandler =
     (property: keyof TableData) => (event: MouseEvent<unknown>) => {
       onRequestSort(event, property);
@@ -12,7 +15,7 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
     <>
       <TableHead>
         <TableRow>
-          {columns.map((headCell) => (
+          {columns.map((headCell: any) => (
             <TableCell
               key={headCell.id}
               align={headCell.numeric ? "right" : "left"}
@@ -26,7 +29,7 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
               >
                 {headCell.label}
                 {orderBy === headCell.id ? (
-                  <Box component="span" sx={visuallyHidden}>
+                  <Box component="span">
                     {order === "desc"
                       ? "sorted descending"
                       : "sorted ascending"}
@@ -41,4 +44,4 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
   );
 };
 
-export default AppTableHead;
+export default memo(AppTableHead);
