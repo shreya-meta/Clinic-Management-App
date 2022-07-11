@@ -1,0 +1,103 @@
+{
+  "specialities": [
+    {
+      "id": 1,
+      "name": "Cancer specialities"
+    },
+    {
+      "id": 2,
+      "name": "Nutrition & Dietetics"
+    },
+    {
+      "id": 3,
+      "name": "Neurology"
+    },
+    {
+      "id": 4,
+      "name": "Bariatric Surgery"
+    },
+    {
+      "id": 5,
+      "name": "Cardiology"
+    },
+    {
+      "id": 6,
+      "name": "Cardiothoracic And Vascular Surgery"
+    },
+    {
+      "id": 7,
+      "name": "Dermatology"
+    },
+    {
+      "id": 8,
+      "name": "Endocrinology"
+    },
+    {
+      "id": 9,
+      "name": "General Surgery"
+    },
+    {
+      "id": 10,
+      "name": "Liver Transplant"
+    },
+    {
+      "id": 11,
+      "name": "Hepatic Surgery"
+    },
+    {
+      "id": 12,
+      "name": "Nephrology"
+    },
+    {
+      "id": 13,
+      "name": "Obstetrics And Gynecology"
+    },
+    {
+      "id": 14,
+      "name": "Orthopedics"
+    },
+    {
+      "id": 15,
+      "name": "Pediatric Surgery"
+    },
+    {
+      "id": 16,
+      "name": "Physiotherapy"
+    },
+    {
+      "id": 17,
+      "name": "Plastic Surgery"
+    },
+    {
+      "id": 18,
+      "name": "Psychiatry"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "name": "gita",
+      "speciality": [
+        {
+          "id": 1,
+          "name": "Hancer specialities"
+        }
+      ],
+      "visiting_hours": "",
+      "email": "",
+      "password": "",
+      "picture": "",
+      " phone_no": ""
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "appointments": {
+    "name": "typicode"
+  }
+}
