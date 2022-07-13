@@ -14,7 +14,9 @@ function App() {
       {/* <Login /> */}
       {/* <AppTable /> */}
       {/* <Provider store={store}> */}
-      <PrivateRoutes />
+      <Router>
+        <PrivateRoutes />
+      </Router>
       {/* </Provider> */}
     </div>
   );

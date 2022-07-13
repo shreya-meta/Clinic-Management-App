@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Route } from "react-router";
+import { Route } from "react-router-dom";
 import { ProtectedRouteProps } from "./types";
 const ProtectedRoute: FC<ProtectedRouteProps> = ({
   component: Component,
