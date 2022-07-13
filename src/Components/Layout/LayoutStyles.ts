@@ -1,16 +1,11 @@
 import { makeStyles } from "@mui/styles";
-import {
-  styled,
-  useTheme,
-  Theme,
-  CSSObject,
-  alpha,
-} from "@mui/material/styles";
+import { styled, Theme, CSSObject, alpha } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 import { AppBarProps } from "./Sidebar/types";
 const drawerWidth = 230;
+// styles for layout
 export const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
@@ -18,49 +13,19 @@ export const useStyles = makeStyles(() => ({
   // searchSidebar: {
   //   width: "38%",
   // },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-    minHeight: "46px",
-  },
-  toolbarTop_layout: {
-    marginTop: 50,
-  },
-  toolbarIcon: {
-    color: "white",
-    justifyContent: "flex-end",
-    textAlign: "center",
-    padding: "12px",
-    alignItems: "center",
-    minHeight: "72px",
-    fontWeight: "bold",
-    paddingBottom: "24px",
-    paddingTop: "24px",
-  },
   menuButton: {
     // margin: "0 0 0 18px",
   },
   menuButtonHidden: {
     margin: "0 0 0 28px",
   },
-
-  title: {
-    flexGrow: 1,
-  },
   content: {
     flexGrow: 1,
-    height: "100vh",
-    padding: "4px",
-    overflow: "auto",
+    padding: "1vh",
   },
-  container: {
-    paddingTop: "32px",
-    paddingBottom: "32px",
-  },
-  paper: {
-    padding: "16px",
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
+  layoutCard: {
+    marginTop: "10vh",
+    height: `88vh`,
   },
   sidebarList: {
     color: "white",
@@ -84,52 +49,12 @@ export const useStyles = makeStyles(() => ({
   Iconbg: {
     color: "#fff !important",
   },
-  search: {
-    position: "relative",
-    // borderRadius: theme.shape.borderRadius,
-    backgroundColor: "rgb(255 255 255 / 33%)",
-    "&:hover": {
-      backgroundColor: "rgb(255 255 255 / 33%)",
-    },
-    marginLeft: 0,
-    width: "100%",
-  },
-  searchIcon: {
-    padding: "16px",
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  searchAppbar: {
-    position: "relative",
-    backgroundColor: "#f5fcff",
-    borderRadius: "10px",
-    "&:hover": {
-      borderColor: "#a4adb2",
-    },
-    padding: "2px 4px",
-    // width: "25% !important",
-    height: 30,
-    marginLeft: 0,
-    margin: 9,
-  },
   searchSidebar: {
     width: " 200px",
     height: "35px",
   },
-  badgeIcons: {
-    position: "relative",
-    marginTop: 12,
-  },
   accountIcon: {
     color: "#2f8ca7",
-  },
-  logo: {
-    maxWidth: 50,
-    marginRight: "10px",
   },
   SidebarIcon: {
     width: "16px !important",
