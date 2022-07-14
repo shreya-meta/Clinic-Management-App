@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC, memo } from "react";
 import { Route } from "react-router-dom";
 import { ProtectedRouteProps } from "./types";
 const ProtectedRoute: FC<ProtectedRouteProps> = ({
@@ -19,4 +19,4 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({
   );
 };
 
-export default React.memo(ProtectedRoute);
+export default memo(ProtectedRoute);

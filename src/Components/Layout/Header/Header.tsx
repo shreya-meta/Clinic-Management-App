@@ -29,7 +29,6 @@ import { theme } from "../../GlobalStyles/GlobalStyles";
 import { AppContext } from "../../../Utils/AppUtils";
 const Header = ({ search, setSearch }: any) => {
   const { open, setOpen } = useContext(AppContext);
-  console.log(open, "helo open");
   const handleDrawer = () => {
     setOpen(!open);
   };

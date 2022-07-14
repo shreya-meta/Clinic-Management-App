@@ -1,5 +1,10 @@
 export interface doctorColumn {
-  id: "name" | "visiting_hours" | "phone_no";
+  id: keyof doctorListingProps;
   label: string;
   minWidth?: number;
+}
+export interface doctorListingProps {
+  name: string;
+  visiting_hours: string;
+  phone_no: string;
 }

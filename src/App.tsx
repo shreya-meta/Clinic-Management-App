@@ -8,16 +8,14 @@ import AppTable from "../src/Components/Table/AppTable";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import { store } from "./Store";
 function App() {
+  console.log("I am in app");
   return (
     <div className="App">
-      {/* <Layout /> */}
-      {/* <Login /> */}
-      {/* <AppTable /> */}
-      {/* <Provider store={store}> */}
-      <Router>
-        <PrivateRoutes />
-      </Router>
-      {/* </Provider> */}
+      <Provider store={store}>
+        <Router>
+          <PrivateRoutes />
+        </Router>
+      </Provider>
     </div>
   );
 }

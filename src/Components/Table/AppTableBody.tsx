@@ -1,10 +1,14 @@
 import { TableRow, TableCell } from "@mui/material";
 import React, { useContext } from "react";
 import { AppContext } from "../../Utils/AppUtils";
+import { AppTableContext } from "./AppTable";
 import { Order } from "./types";
 
 const AppTableBody = () => {
-  const { page, rowsPerPage, rows, order, orderBy } = useContext(AppContext);
+  const { page, rowsPerPage, rows } = useContext(AppContext);
+  const { columns, orderBy, order } = useContext(AppTableContext);
+
+  console.log(rows, "rows in body");
   function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
       return -1;
@@ -44,16 +48,14 @@ const AppTableBody = () => {
       {stableSort(rows, getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row, index) => {
-          const labelId = `enhanced-table-checkbox-${index}`;
           return (
-            <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-              <TableCell component="th" id={labelId} scope="row" padding="none">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+            <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+              <TableCell>{index + 1}</TableCell>
+              {columns?.map((column: any) => {
+                const { id } = column;
+                let value = row[id];
+                return <TableCell key={id}>{value ? value : "-"}</TableCell>;
+              })}
             </TableRow>
           );
         })}

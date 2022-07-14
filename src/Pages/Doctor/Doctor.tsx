@@ -1,7 +1,15 @@
+import React, { useContext } from "react";
+import AppTable from "../../Components/Table/AppTable";
+import { doctorsSelector } from "../../Redux/Doctor/selector";
+import { useAppSelector } from "../../Utils/appHooks";
+import { AppContext } from "../../Utils/AppUtils";
 import { doctorColumn } from "./types";
 
 const Doctor = () => {
-  // table columns
+  const { rows, loading } = useContext(AppContext);
+  // const { doctors, loading } = useAppSelector(doctorsSelector);
+  console.log(rows, "doctors in doctor");
+  // table rows
   const columns: doctorColumn[] = [
     { id: "name", label: "Name" },
     { id: "visiting_hours", label: "Visting Hours" },
@@ -9,9 +17,9 @@ const Doctor = () => {
   ];
   return (
     <>
-      <p>Hello Doctor</p>
+      <AppTable columns={columns} />
     </>
   );
 };
 
-export default Doctor;
+export default React.memo(Doctor);

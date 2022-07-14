@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Switch } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
 
@@ -6,13 +6,17 @@ import ProtectedRoutes from "./ProtectedRoutes";
 
 // doctor page
 const Doctor = lazy(() => import("../Pages/Doctor"));
-
 const PrivateRoutes = () => {
   return (
     <>
       <Suspense fallback={<></>}>
         <Switch>
-          <ProtectedRoutes exact path="/" component={Doctor} permission="" />
+          <ProtectedRoutes
+            exact
+            path="/doctor"
+            component={Doctor}
+            permission=""
+          />
         </Switch>
       </Suspense>
     </>

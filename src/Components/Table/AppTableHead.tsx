@@ -5,8 +5,10 @@ import { Box, TableRow, TableSortLabel } from "@mui/material";
 import { TableData, TableHeadProps } from "./types";
 import { MouseEvent, useContext } from "react";
 import { AppContext } from "../../Utils/AppUtils";
+import { AppTableContext } from "./AppTable";
 const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
-  const { columns, orderBy, order } = useContext(AppContext);
+  const { columns, orderBy, order } = useContext(AppTableContext);
+  console.log(columns, "test columns");
   const createSortHandler =
     (property: keyof TableData) => (event: MouseEvent<unknown>) => {
       onRequestSort(event, property);
@@ -15,6 +17,7 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
     <>
       <TableHead>
         <TableRow>
+          <TableCell>S.N.</TableCell>
           {columns.map((headCell: any) => (
             <TableCell
               key={headCell.id}
