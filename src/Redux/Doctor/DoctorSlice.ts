@@ -36,7 +36,9 @@ const doctorSlice = createSlice({
       state.loading = false;
     },
     doctorEditSuccessAction: (state, { payload }) => {
-      state.doctor = state.doctors.find((doctor: any) => doctor.id === payload);
+      state.doctor = state.doctors.find(
+        (doctor: any) => doctor.id === payload
+      )!;
       state.edit = true;
     },
   },

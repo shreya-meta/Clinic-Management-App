@@ -3,11 +3,11 @@ export interface doctorColumn {
   label: string;
   minWidth?: number;
 }
-// export interface doctorColumn {
-//   name: string;
-//   visiting_hours: string;
-//   phone_no: string;
-// }
+export interface doctorListingProps {
+  name: string;
+  visiting_hours: string;
+  phone_no: string;
+}
 export interface specialityProps {
   id: number;
   name: string;

@@ -3,12 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { DropzoneArea } from "react-mui-dropzone";
 import * as Yup from "yup";
 import {
-  Autocomplete,
   Grid,
-  TextareaAutosize,
   TextField,
   IconButton,
   InputAdornment,
+  Button,
 } from "@mui/material";
 import { doctorProps } from "./types";
 import { useAppDispatch } from "../../Utils/appHooks";
@@ -20,8 +19,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { createDoctor } from "../../Redux/Doctor/thunk";
 const CreateDoctor = () => {
-  const {  edit, doctor } = useAppSelector(doctorsSelector);
-  const { rows ,setShowModal} = useContext(AppContext);
+  const { edit, doctor } = useAppSelector(doctorsSelector);
+  const { rows, setShowModal, loading } = useContext(AppContext);
+
   // props
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -40,17 +40,18 @@ const CreateDoctor = () => {
   const current = new Date();
   //initial state of the form
   const initialState: doctorProps = {
-    name: edit ? doctor?.name : "",
-    speciality: edit ? doctor?.speciality : "",
-    visiting_hours: edit ? doctor?.visiting_hours : "",
-    email: edit ? doctor?.email : "",
-    picture: edit ? doctor?.picture : "",
-    group: edit ? doctor?.group : null,
+    name: edit ? (doctor?.name ? doctor?.name : "") : "",
+    speciality: edit ? (doctor?.speciality ? doctor?.speciality : "") : "",
+    visiting_hours: edit
+      ? doctor?.visiting_hours
+        ? doctor?.visiting_hours
+        : ""
+      : "",
+    email: edit ? (doctor?.email ? doctor?.email : "") : "",
+    picture: edit ? (doctor?.picture ? doctor?.picture : "") : "",
+    phone_no: edit ? (doctor?.phone_no ? doctor?.phone_no : "") : "",
     password: "",
-    confirmPassword: "",
   };
-
-  let photo: any = doctor?.photo;
   //validation rules of the form
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -60,13 +61,7 @@ const CreateDoctor = () => {
         "name must have at least 4 characters and all should be in lowercase."
       ),
     email: Yup.string().required("Required").email("Invalid email format"),
-    pciture: Yup.mixed().test(
-      "FILE_SIZE",
-      "File size greater than 2.00MB",
-      (value) => {
-        return !value || (value && value.size <= 2097152);
-      }
-    ),
+    picture: Yup.mixed(),
     password: edit
       ? Yup.string()
       : Yup.string()
@@ -85,23 +80,22 @@ const CreateDoctor = () => {
 
   const onSubmit = (values: doctorProps) => {
     setLock(true);
-      if (edit) {
-      } else {
-        // dispatching create action
-        dispatch(
-          createDoctor({
-            ...values
-          })
-        );
-      }
-      setLock(false);
-      setShowModal(false);
+    if (edit) {
+    } else {
+      // dispatching create action
+      dispatch(
+        createDoctor({
+          ...values,
+        })
+      );
     }
+    setLock(false);
+    setShowModal(false);
   };
-  const loadSpecialityOptions = () => {
-    setFocus(true);
-    dispatch(getAllUserGroup());
-  };
+  // const loadSpecialityOptions = () => {
+  //   setFocus(true);
+  //   dispatch(getAllSpecialityOptions());
+  // };
   return (
     <>
       <Grid>
@@ -119,54 +113,20 @@ const CreateDoctor = () => {
                     <Grid container spacing={1}>
                       <Grid item xs={4}>
                         <TextField
-                          name="firstName"
+                          name="name"
                           autoFocus
-                          value={formik?.values?.firstName}
-                          id="firstName"
-                          label="First Name"
+                          value={formik?.values?.name}
+                          id="name"
+                          label="Name"
                           variant="outlined"
                           onChange={(e) => {
                             formik.setFieldValue(
-                              "firstName",
+                              "name",
                               e.target.value.trimStart()
                             );
                           }}
                         />
-                        <ErrorMessage name="firstName" component={TextError} />
-                      </Grid>
-                      <Grid item xs={4}>
-                        <TextField
-                          name="middleName"
-                          value={formik.values.middleName}
-                          id="middleName"
-                          label="Middle Name"
-                          variant="outlined"
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              "middleName",
-                              e.target.value.trimStart()
-                            );
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={4}>
-                        <TextField
-                          name="lastName"
-                          value={formik.values.lastName}
-                          id="lastName"
-                          label="Last Name"
-                          variant="outlined"
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              "lastName",
-                              e.target.value.trimStart()
-                            );
-                          }}
-                        />
-                        {/* <ErrorMessage
-                              name="lastName"
-                              component={TextError}
-                            /> */}
+                        <ErrorMessage name="name" component={TextError} />
                       </Grid>
                       <Grid item xs={4}>
                         <TextField
@@ -221,62 +181,24 @@ const CreateDoctor = () => {
                         />
                         <ErrorMessage name="email" component={TextError} />
                       </Grid>
-                      <Grid item xs={4}>
-                        <TextField
-                          name="address"
-                          value={formik.values.address}
-                          id="address"
-                          label="Address"
-                          variant="outlined"
-                          onChange={(e) => {
-                            formik.setFieldValue(
-                              "address",
-                              e.target.value.trimStart()
-                            );
-                          }}
-                        />
-                        {/* <ErrorMessage
-                              name="address"
-                              component={TextError}
-                            /> */}
-                      </Grid>
-                      <Grid item xs={4}>
-                        <TextField
-                          id="date"
-                          name="birthDate"
-                          label="Date of Birth"
-                          type="date"
-                          value={formik.values.birthDate}
-                          variant="outlined"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          inputProps={{
-                            max: todayDate,
-                          }}
-                          onChange={(e) => {
-                            formik.setFieldValue("birthDate", e.target.value);
-                          }}
-                        />
-                        <ErrorMessage name="birthDate" component={TextError} />
-                      </Grid>
+
                       <Grid item xs={4}>
                         <TextField
                           type="number"
-                          name="mobileNo"
-                          value={formik.values.mobileNo}
-                          id="mobileNo"
+                          name="phone_no"
+                          value={formik.values.phone_no}
+                          id="phone_no"
                           label="Mobile Number"
                           variant="outlined"
                           onChange={(e) => {
                             formik.setFieldValue(
-                              "mobileNo",
+                              "phone_no",
                               e.target.value.trimStart()
                             );
                           }}
                         />
                         {/* <ErrorMessage
-                              name="mobileNo"
+                              name="phone_no"
                               component={TextError}
                             /> */}
                       </Grid>
@@ -358,7 +280,7 @@ const CreateDoctor = () => {
                         </>
                       )}
 
-                      <Grid item xs={4}>
+                      {/* <Grid item xs={4}>
                         <Autocomplete
                           id="virtualize-demo"
                           options={groups}
@@ -389,43 +311,14 @@ const CreateDoctor = () => {
                           )}
                         />
                         <ErrorMessage name="group" component={TextError} />
-                      </Grid>
-
-                      <Grid item xs={4}>
-                        <Autocomplete
-                          id="filter-demo"
-                          options={genders}
-                          value={formik.values.gender}
-                          getOptionLabel={(option) => option.name}
-                          // filterOptions={filterOptions}
-                          isOptionEqualToValue={(option, value) =>
-                            option?.id === value?.id
-                          }
-                          onChange={(event: any, value: any) => {
-                            if (value !== null) {
-                              formik.setFieldValue("gender", value);
-                            } else {
-                              formik.setFieldValue("gender", null);
-                            }
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label="Gender"
-                              variant="outlined"
-                            />
-                          )}
-                        />
-                        <ErrorMessage name="gender" component={TextError} />
-                      </Grid>
+                      </Grid> */}
                       <Grid item xs={4}>
                         <DropzoneArea
                           onChange={(files) => {
-                            formik.setFieldValue("photo", files[0]);
+                            formik.setFieldValue("picture", files[0]);
                           }}
                           showAlerts={false}
                           filesLimit={1}
-                          initialFiles={user ? [photo] : undefined}
                           acceptedFiles={[
                             "image/jpeg",
                             "image/png",
@@ -433,39 +326,10 @@ const CreateDoctor = () => {
                           ]}
                         />
                       </Grid>
-                      {edit && (
-                        <Grid item xs={4}>
-                          <TextareaAutosize
-                            required
-                            value={formik.values.remarks}
-                            aria-label="minimum height"
-                            name="remarks"
-                            minRows={2}
-                            placeholder="Enter Remarks"
-                            onChange={(e) => {
-                              formik.setFieldValue(
-                                "remarks",
-                                e.target.value.trimStart()
-                              );
-                            }}
-                          />
-                          <ErrorMessage name="remarks" component={TextError} />
-                        </Grid>
-                      )}
-
-                      <Grid item xs={12}>
-                        <Field type="checkbox" name="active" id="active" />
-                        <label htmlFor="active">Active</label>
-                      </Grid>
                     </Grid>
                     <Grid container justifyContent="center">
                       <Grid item>
-                        <Button
-                          type="submit"
-                          title={edit ? "Update" : "Submit"}
-                          loading={loading}
-                          disabled={lock || loading}
-                        />
+                        <Button type="submit" disabled={lock || loading} />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -478,4 +342,5 @@ const CreateDoctor = () => {
     </>
   );
 };
+
 export default React.memo(CreateDoctor);
