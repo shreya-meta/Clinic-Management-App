@@ -3,8 +3,23 @@ export interface doctorColumn {
   label: string;
   minWidth?: number;
 }
-export interface doctorListingProps {
+// export interface doctorColumn {
+//   name: string;
+//   visiting_hours: string;
+//   phone_no: string;
+// }
+export interface specialityProps {
+  id: number;
   name: string;
+}
+export interface doctorProps {
+  id?: number;
+  name: string;
+  // speciality: specialityProps[];
+  speciality: string;
   visiting_hours: string;
+  email: string;
+  password: string;
+  picture: string;
   phone_no: string;
 }

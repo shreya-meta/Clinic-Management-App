@@ -44,6 +44,7 @@ const DoctorListing = () => {
   }, [dispatch]);
   const providerValue = {
     rows: doctors,
+    setShowModal,
     loading,
     page,
     setPage,
