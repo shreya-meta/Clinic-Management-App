@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { doctorProps } from "../../Pages/Doctor/types";
+import { doctorProps, specialityProps } from "../../Pages/Doctor/types";
 
 export interface DoctorState {
   loading: boolean;
   edit: boolean;
   doctors: doctorProps[];
   doctor: doctorProps | null;
+  specialities: specialityProps[];
+  loadingSpeciality: boolean;
 }
 //initialize state
 const initialState: DoctorState = {
@@ -13,6 +15,8 @@ const initialState: DoctorState = {
   edit: false,
   doctors: [],
   doctor: null,
+  specialities: [],
+  loadingSpeciality: false,
 };
 const doctorSlice = createSlice({
   name: "doctor",
@@ -41,6 +45,13 @@ const doctorSlice = createSlice({
       )!;
       state.edit = true;
     },
+    getSpecialitySuccessAction: (state, { payload }) => {
+      state.specialities = payload;
+      state.loadingSpeciality = false;
+    },
+    getSpecialityFailAction: (state) => {
+      state.loadingSpeciality = false;
+    },
   },
 });
 
@@ -52,6 +63,8 @@ export const {
   createDoctorSuccessAction,
   createDoctorFailAction,
   doctorEditSuccessAction,
+  getSpecialitySuccessAction,
+  getSpecialityFailAction,
 } = doctorSlice.actions;
 // export reducer
 export default doctorSlice.reducer;

@@ -15,11 +15,12 @@ export interface specialityProps {
 export interface doctorProps {
   id?: number;
   name: string;
-  // speciality: specialityProps[];
-  speciality: string;
+  speciality: specialityProps[];
+  // speciality: string;
   visiting_hours: string;
   email: string;
   password: string;
-  picture: string;
+  picture: string | null;
+  type: string;
   phone_no: string;
 }
