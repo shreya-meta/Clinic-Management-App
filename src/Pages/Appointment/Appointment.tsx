@@ -6,7 +6,7 @@ import { useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
 import { doctorColumn, doctorProps, specialityProps } from "./types";
 
-const Doctor = () => {
+const Appointment = () => {
   const { loading } = useContext(AppContext);
   const { doctors } = useAppSelector(doctorsSelector);
   // table rows
@@ -31,4 +31,4 @@ const Doctor = () => {
   );
 };
 
-export default React.memo(Doctor);
+export default React.memo(Appointment);

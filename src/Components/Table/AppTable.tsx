@@ -5,34 +5,13 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import AppTableHead from "./AppTableHead";
-import { TableData } from "./types";
+import { TableProps } from "./types";
 import { AppContext } from "../../Utils/AppUtils";
 import AppTableBody from "./AppTableBody";
 import Pagination from "./Pagination";
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-): TableData {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-interface HeadCell {
-  disablePadding: boolean;
-  id: keyof TableData;
-  label: string;
-  numeric: boolean;
-}
 export const AppTableContext = createContext<any>("");
-const AppTable = ({ columns }: any) => {
+const AppTable = ({ columns, rowsValue }: TableProps) => {
   const {
     // orderBy,
     // order,
@@ -40,16 +19,11 @@ const AppTable = ({ columns }: any) => {
     setPage,
     rowsPerPage,
     setRowsPerPage,
-    rows,
   } = useContext(AppContext);
-  console.log(rows, "rows in body");
   // const [order, setOrder] = useState<Order>("asc");
   // const [orderBy, setOrderBy] = useState<keyof TableData>("calories");
 
-  const handleRequestSort = (
-    event: MouseEvent<unknown>,
-    property: keyof TableData
-  ) => {
+  const handleRequestSort = (event: MouseEvent<unknown>, property: any) => {
     // const isAsc = orderBy === property && order === "asc";
     // setOrder(isAsc ? "desc" : "asc");
     // setOrderBy(property);
@@ -57,6 +31,7 @@ const AppTable = ({ columns }: any) => {
   //provided value to the child component
   const providerValue = {
     columns,
+    rowsValue,
     // orderBy,
     // order,
   };
@@ -64,24 +39,24 @@ const AppTable = ({ columns }: any) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={"small"}
-          >
-            <AppTableContext.Provider value={providerValue}>
+        <AppTableContext.Provider value={providerValue}>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={"small"}
+            >
               {/* table head */}
               <AppTableHead onRequestSort={handleRequestSort} />
               <TableBody>
                 {/* table body */}
                 <AppTableBody />
               </TableBody>
-            </AppTableContext.Provider>
-          </Table>
-        </TableContainer>
-        {/* pagination */}
-        <Pagination />
+            </Table>
+          </TableContainer>
+          {/* pagination */}
+          <Pagination />
+        </AppTableContext.Provider>
       </Paper>
     </Box>
   );

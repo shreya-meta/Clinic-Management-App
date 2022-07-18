@@ -1,19 +1,14 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import Layout from "../../Components/Layout";
-import AppTable from "../../Components/Table/AppTable";
-import {
-  clearDoctorDataAction,
-  getSearchedDataSuccessAction,
-} from "../../Redux/Doctor/DoctorSlice";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
-import { getDoctors } from "../../Redux/Doctor/thunk";
+import { getSearchedDataSuccessAction } from "../../Redux/Patient/PatientSlice";
+import { clearPatientDataAction } from "../../Redux/Patient/PatientSlice";
+import { patientSelector } from "../../Redux/Patient/selector";
+import { getPatients } from "../../Redux/Patient/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
-import CreateDoctor from "./CreateDoctor";
-import Doctor from "./Doctor";
-import { doctorProps } from "./types";
+import CreatePatient from "./CreatePatient";
+import Patient from "./Patient";
+import { patientProps } from "./types";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
 
 const DoctorListing = () => {
@@ -22,20 +17,20 @@ const DoctorListing = () => {
   //Handle Open Modal
   const handleClickOpen = () => {
     setShowModal(true);
-    dispatch(clearDoctorDataAction());
+    dispatch(clearPatientDataAction());
   };
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // initialize the redux hook
   const dispatch = useAppDispatch();
-  const { doctors, loading, edit } = useAppSelector(doctorsSelector);
+  const { patients, loadingPatient, edit } = useAppSelector(patientSelector);
   // const { doctors, loading } = useSelector(doctorsSelector);
   // console.log(doctors, "doctors");
   //state for searching
   const [search, setSearch] = useState("");
   console.log(search, "test search");
-  const types = "doctor";
-  const title = "Doctor";
+  const types = "patient";
+  const title = "Patient";
   const ModalValue = {
     edit,
     showModal,
@@ -47,25 +42,24 @@ const DoctorListing = () => {
 
   useEffect(() => {
     console.log("inside useEffect");
-    dispatch(getDoctors());
+    dispatch(getPatients());
   }, [dispatch]);
   const providerValue = {
     setShowModal,
-    loading,
+    loadingPatient,
     page,
     setPage,
     rowsPerPage,
     setRowsPerPage,
     types,
   };
-  console.log(doctors, "doctors in index page");
   useEffect(() => {
-    let searchedvalue = doctors.filter((row: doctorProps) => {
-      const { name, speciality } = row;
+    let searchedvalue = patients.filter((row: patientProps) => {
+      const { name } = row;
       return name.toLowerCase().includes(search.toLowerCase());
     });
     if (search === "") {
-      dispatch(getDoctors());
+      dispatch(getPatients());
     } else {
       dispatch(getSearchedDataSuccessAction(searchedvalue));
     }
@@ -81,13 +75,13 @@ const DoctorListing = () => {
         types={types}
       >
         <AppContext.Provider value={providerValue}>
-          <Doctor />
+          <Patient />
         </AppContext.Provider>
       </Layout>
       {showModal && (
         <Suspense fallback={<></>}>
-          <Modal modalValue={ModalValue} maxWidth="lg">
-            <CreateDoctor setShowModal={setShowModal} />
+          <Modal modalValue={ModalValue} maxWidth="md">
+            <CreatePatient setShowModal={setShowModal} />
           </Modal>
         </Suspense>
       )}

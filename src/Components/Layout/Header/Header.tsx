@@ -72,6 +72,7 @@ const Header = ({ search, setSearch }: any) => {
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            onChange={handleSearch}
           />
         </Search>
         <IconButton

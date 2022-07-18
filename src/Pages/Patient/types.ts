@@ -1,15 +1,16 @@
 import { Dispatch } from "react";
 
-export interface doctorColumn {
-  id: keyof doctorListingProps;
+export interface patientColumn {
+  id: keyof patientListingProps;
   label: string;
   minWidth?: number;
 }
-export interface doctorListingProps {
+export interface patientListingProps {
   name: string;
-  visiting_hours: string;
-  phone_no: string;
-  speciality: specialityProps;
+  age: string;
+  sex: string;
+  location: string;
+  history?: any;
 }
 
 export interface specialityProps {
@@ -28,6 +29,15 @@ export interface doctorProps {
   type?: string;
   phone_no: string;
   addedPicture?: File;
+}
+export interface patientProps {
+  id?: number;
+  name: string;
+  dobDate: string;
+  age: string;
+  sex: string;
+  location: string;
+  history?: any;
 }
 export interface createDoctorProps {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;

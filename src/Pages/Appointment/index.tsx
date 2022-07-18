@@ -11,8 +11,8 @@ import { doctorsSelector } from "../../Redux/Doctor/selector";
 import { getDoctors } from "../../Redux/Doctor/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
-import CreateDoctor from "./CreateDoctor";
-import Doctor from "./Doctor";
+import CreateAppointment from "./CreateAppointment";
+import Appointment from "./Appointment";
 import { doctorProps } from "./types";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
 
@@ -81,13 +81,13 @@ const DoctorListing = () => {
         types={types}
       >
         <AppContext.Provider value={providerValue}>
-          <Doctor />
+          <Appointment />
         </AppContext.Provider>
       </Layout>
       {showModal && (
         <Suspense fallback={<></>}>
           <Modal modalValue={ModalValue} maxWidth="lg">
-            <CreateDoctor setShowModal={setShowModal} />
+            <CreateAppointment setShowModal={setShowModal} />
           </Modal>
         </Suspense>
       )}

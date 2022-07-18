@@ -1,14 +1,14 @@
 import TablePagination from "@mui/material/TablePagination";
 import { useContext } from "react";
 import { AppContext } from "../../Utils/AppUtils";
+import { AppTableContext } from "./AppTable";
 
 const Pagination = () => {
-  const { setRowsPerPage, setPage, rows, rowsPerPage, page } =
-    useContext(AppContext);
+  const { setRowsPerPage, setPage, rowsPerPage, page } = useContext(AppContext);
+  const { rowsValue } = useContext(AppTableContext);
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -20,7 +20,7 @@ const Pagination = () => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={rows.length}
+        count={rowsValue?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

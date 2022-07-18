@@ -10,11 +10,9 @@ import { handleEdit } from "./handleEvents";
 
 const AppTableBody = () => {
   const dispatch = useAppDispatch();
-  const { page, rowsPerPage, rows, types, setShowModal } =
-    useContext(AppContext);
-  const { columns, orderBy, order } = useContext(AppTableContext);
+  const { page, rowsPerPage, types, setShowModal } = useContext(AppContext);
+  const { columns, orderBy, order, rowsValue } = useContext(AppTableContext);
   const classess = useGlobalStyles();
-  console.log(rows, "rows in body");
   function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
       return -1;
@@ -51,7 +49,7 @@ const AppTableBody = () => {
   }
   return (
     <>
-      {stableSort(rows, getComparator(order, orderBy))
+      {stableSort(rowsValue, getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row, index) => {
           return (
