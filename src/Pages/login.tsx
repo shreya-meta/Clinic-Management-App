@@ -82,7 +82,7 @@ const Login = () => {
         ? {
             role: "doctor",
             loggedUser: doctors?.find(
-              (doctor: doctorProps) => doctor?.email === values.email
+              (doctor: doctorProps) => doctor?.email === email
             ),
           }
         : "n/a";

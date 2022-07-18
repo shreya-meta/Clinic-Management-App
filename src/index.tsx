@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store, persistor } from "./Store";
 import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,10 +15,12 @@ root.render(
   <React.StrictMode>
     {/* app can be connected to the store, */}
     <Provider store={store}>
-      {/* way to delay rendering until your persisted state has been retrieved and saved to redux */}
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
+      <Router>
+        {/* way to delay rendering until your persisted state has been retrieved and saved to redux */}
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Router>
     </Provider>
   </React.StrictMode>
 );

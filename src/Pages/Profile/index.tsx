@@ -1,9 +1,6 @@
 import React, { useState, Suspense, lazy } from "react";
 import Layout from "../../Components/Layout";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
-import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
-import { AppContext } from "../../Utils/AppUtils";
-const Modal = lazy(() => import("../../Components/Modal/Modal"));
+import ProfileInfo from "./Profile";
 const Profile = () => {
   // const { doctors, loading } = useSelector(doctorsSelector);
   //state for searching
@@ -12,12 +9,9 @@ const Profile = () => {
   const title = "Doctor";
   return (
     <>
-      <Layout
-        title={title}
-        search={search}
-        setSearch={setSearch}
-        types={types}
-      ></Layout>
+      <Layout title={title} search={search} setSearch={setSearch} types={types}>
+        <ProfileInfo />
+      </Layout>
     </>
   );
 };

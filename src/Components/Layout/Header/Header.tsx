@@ -25,7 +25,7 @@ import {
   StyledInputBase,
   useStyles,
 } from "../LayoutStyles";
-import { theme } from "../../GlobalStyles/GlobalStyles";
+import PersonIcon from "@mui/icons-material/Person";
 import { AppContext } from "../../../Utils/AppUtils";
 import { useAppDispatch } from "../../../Utils/appHooks";
 import { logoutSuccessAction } from "../../../Redux/Login/LoginSlice";
@@ -89,6 +89,12 @@ const Header = ({ search, setSearch }: any) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
+          <Link to="/profile" className={classes.menuLink}>
+            <MenuItem onClick={handleClose}>
+              <PersonIcon color="primary" />
+              Profile
+            </MenuItem>
+          </Link>
           <Link to="/" className={classes.menuLink}>
             <MenuItem onClick={handleLogout}>
               <PowerSettingsNewIcon color="primary" />

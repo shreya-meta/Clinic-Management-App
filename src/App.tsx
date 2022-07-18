@@ -9,14 +9,13 @@ import CustomAlert from "./Components/Alert/CustomAlert";
 import PublicRoutes from "./Routes/PublicRoutes";
 import { loginSelector } from "./Redux/Login/selector";
 const App = () => {
-  console.log(alertSelector, "hello alert");
   const { open, message } = useAppSelector(alertSelector);
   const { isAuthenticated } = useAppSelector(loginSelector);
   return (
     <>
       {/* open alert  */}
       {open && <CustomAlert openAlert={open} data={message} />}
-      <Router>{isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />}</Router>
+      {isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />}
     </>
   );
 };

@@ -4,9 +4,10 @@ import { loginSelector } from "../../Redux/Login/selector";
 import { useAppSelector } from "../../Utils/appHooks";
 import { useDoctorStyles } from "../Doctor/DoctorStyles";
 import { doctorProps } from "../Doctor/types";
-const Profile = () => {
+const ProfileInfo = () => {
   const classes = useDoctorStyles();
   const { loggedUser } = useAppSelector(loginSelector);
+  console.log(loggedUser, "loggedUser");
   return (
     <>
       <Grid container spacing={2}>
@@ -28,4 +29,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileInfo;
