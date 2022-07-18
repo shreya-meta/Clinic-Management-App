@@ -4,5 +4,4 @@ export interface ProtectedRouteProps {
   exact: boolean;
   component: React.ComponentType<RouteComponentProps>;
   path: string;
-  permission: string;
 }

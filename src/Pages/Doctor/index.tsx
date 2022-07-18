@@ -69,7 +69,7 @@ const DoctorListing = () => {
       {showModal && (
         <Suspense fallback={<></>}>
           <Modal modalValue={ModalValue} maxWidth="lg">
-            <CreateDoctor />
+            <CreateDoctor setShowModal={setShowModal} />
           </Modal>
         </Suspense>
       )}

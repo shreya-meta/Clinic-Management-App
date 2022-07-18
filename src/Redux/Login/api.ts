@@ -1,4 +1,4 @@
-import { doctorProps, specialityProps } from "../../Pages/Doctor/types";
+import { doctorProps } from "../../Pages/Doctor/types";
 import { axiosInstance } from "../../Utils/axios";
 
 //get data

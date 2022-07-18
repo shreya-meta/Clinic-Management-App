@@ -10,7 +10,7 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material";
-import { doctorProps, specialityProps } from "./types";
+import { createDoctorProps, doctorProps, specialityProps } from "./types";
 import { useAppDispatch } from "../../Utils/appHooks";
 import { doctorsSelector } from "../../Redux/Doctor/selector";
 import { AppContext } from "../../Utils/AppUtils";
@@ -20,10 +20,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { createDoctor, getSpecialities } from "../../Redux/Doctor/thunk";
 import { useAppStyles } from "../../Utils/AppStyles";
-const CreateDoctor = () => {
-  const { edit, doctor, specialities } = useAppSelector(doctorsSelector);
+const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
+  const { edit, doctor, specialities, loading } =
+    useAppSelector(doctorsSelector);
   console.log(specialities, "specialities");
-  const { rows, setShowModal, loading } = useContext(AppContext);
 
   // props
   const dispatch = useAppDispatch();

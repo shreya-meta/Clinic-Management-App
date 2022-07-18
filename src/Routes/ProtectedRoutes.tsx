@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import { ProtectedRouteProps } from "./types";
 const ProtectedRoute: FC<ProtectedRouteProps> = ({
   component: Component,
-  permission,
   path,
   ...rest
 }) => {

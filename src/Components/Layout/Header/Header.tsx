@@ -27,7 +27,10 @@ import {
 } from "../LayoutStyles";
 import { theme } from "../../GlobalStyles/GlobalStyles";
 import { AppContext } from "../../../Utils/AppUtils";
+import { useAppDispatch } from "../../../Utils/appHooks";
+import { logoutSuccessAction } from "../../../Redux/Login/LoginSlice";
 const Header = ({ search, setSearch }: any) => {
+  const dispatch = useAppDispatch();
   const { open, setOpen } = useContext(AppContext);
   const handleDrawer = () => {
     setOpen(!open);
@@ -43,6 +46,10 @@ const Header = ({ search, setSearch }: any) => {
 
   const handleSearch = (e: any) => {
     setSearch(e?.target?.value.toLowerCase());
+  };
+  //handle logout
+  const handleLogout = () => {
+    dispatch(logoutSuccessAction());
   };
   return (
     <AppBar position="fixed" open={open}>
@@ -83,7 +90,7 @@ const Header = ({ search, setSearch }: any) => {
           onClose={handleClose}
         >
           <Link to="/" className={classes.menuLink}>
-            <MenuItem>
+            <MenuItem onClick={handleLogout}>
               <PowerSettingsNewIcon color="primary" />
               Logout
             </MenuItem>

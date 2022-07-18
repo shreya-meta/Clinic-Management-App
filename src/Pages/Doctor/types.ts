@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 export interface doctorColumn {
   id: keyof doctorListingProps;
   label: string;
@@ -19,8 +21,11 @@ export interface doctorProps {
   // speciality: string;
   visiting_hours: string;
   email: string;
-  password: string;
+  password?: string;
   picture: string | null;
-  type: string;
+  type?: string;
   phone_no: string;
+}
+export interface createDoctorProps {
+  setShowModal: Dispatch<React.SetStateAction<boolean>>;
 }
