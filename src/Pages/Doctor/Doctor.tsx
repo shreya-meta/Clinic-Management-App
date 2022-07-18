@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import AppTable from "../../Components/Table/AppTable";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
-import { useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
 import { doctorColumn } from "./types";
 

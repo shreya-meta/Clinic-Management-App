@@ -41,6 +41,7 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
               </TableSortLabel>
             </TableCell>
           ))}
+          <TableCell>Actions</TableCell>
         </TableRow>
       </TableHead>
     </>

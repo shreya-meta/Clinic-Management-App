@@ -25,6 +25,7 @@ export interface doctorProps {
   picture: string | null;
   type?: string;
   phone_no: string;
+  addedPicture?: File;
 }
 export interface createDoctorProps {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;

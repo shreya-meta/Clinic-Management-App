@@ -40,17 +40,23 @@ const doctorSlice = createSlice({
       state.loading = false;
     },
     doctorEditSuccessAction: (state, { payload }) => {
-      state.doctor = state.doctors.find(
-        (doctor: any) => doctor.id === payload
-      )!;
+      state.doctor = payload;
       state.edit = true;
     },
     getSpecialitySuccessAction: (state, { payload }) => {
       state.specialities = payload;
       state.loadingSpeciality = false;
+      state.loading = false;
     },
     getSpecialityFailAction: (state) => {
       state.loadingSpeciality = false;
+      state.loading = false;
+    },
+    updateDoctorSuccessAction: (state) => {
+      state.edit = false;
+    },
+    updateDoctorFailAction: (state) => {
+      state.edit = false;
     },
   },
 });
@@ -65,6 +71,8 @@ export const {
   doctorEditSuccessAction,
   getSpecialitySuccessAction,
   getSpecialityFailAction,
+  updateDoctorSuccessAction,
+  updateDoctorFailAction,
 } = doctorSlice.actions;
 // export reducer
 export default doctorSlice.reducer;

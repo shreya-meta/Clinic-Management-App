@@ -1,13 +1,19 @@
-import { TableRow, TableCell } from "@mui/material";
+import { TableRow, TableCell, Button } from "@mui/material";
 import React, { useContext } from "react";
 import { AppContext } from "../../Utils/AppUtils";
 import { AppTableContext } from "./AppTable";
+import EditIcon from "@mui/icons-material/Edit";
 import { Order } from "./types";
+import { useGlobalStyles } from "../GlobalStyles/GlobalStyles";
+import { useAppDispatch } from "../../Utils/appHooks";
+import { handleEdit } from "./handleEvents";
 
 const AppTableBody = () => {
-  const { page, rowsPerPage, rows } = useContext(AppContext);
+  const dispatch = useAppDispatch();
+  const { page, rowsPerPage, rows, types, setShowModal } =
+    useContext(AppContext);
   const { columns, orderBy, order } = useContext(AppTableContext);
-
+  const classess = useGlobalStyles();
   console.log(rows, "rows in body");
   function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -56,6 +62,16 @@ const AppTableBody = () => {
                 let value = row[id];
                 return <TableCell key={id}>{value ? value : "-"}</TableCell>;
               })}
+              <TableCell>
+                <Button
+                  className={classess.mainButton}
+                  onClick={() => {
+                    handleEdit(row, types, dispatch, setShowModal);
+                  }}
+                >
+                  <EditIcon sx={{ color: "white" }} />
+                </Button>
+              </TableCell>
             </TableRow>
           );
         })}
