@@ -9,7 +9,7 @@ export interface doctorListingProps {
   name: string;
   visiting_hours: string;
   phone_no: string;
-  speciality: specialityProps;
+  specialityDisplay: specialityProps;
 }
 
 export interface specialityProps {

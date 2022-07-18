@@ -17,19 +17,6 @@ export interface specialityProps {
   id: number;
   name: string;
 }
-export interface doctorProps {
-  id?: number;
-  name: string;
-  speciality: specialityProps[];
-  // speciality: string;
-  visiting_hours: string;
-  email: string;
-  password?: string;
-  picture: string | null;
-  type?: string;
-  phone_no: string;
-  addedPicture?: File;
-}
 export interface patientProps {
   id?: number;
   name: string;
@@ -39,6 +26,6 @@ export interface patientProps {
   location: string;
   history?: any;
 }
-export interface createDoctorProps {
+export interface createPatientProps {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
 }

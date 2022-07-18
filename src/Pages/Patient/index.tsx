@@ -11,7 +11,7 @@ import Patient from "./Patient";
 import { patientProps } from "./types";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
 
-const DoctorListing = () => {
+const PatientListing = () => {
   // state for opening and closing Modal
   const [showModal, setShowModal] = useState(false);
   //Handle Open Modal
@@ -89,4 +89,4 @@ const DoctorListing = () => {
   );
 };
 
-export default React.memo(DoctorListing);
+export default React.memo(PatientListing);

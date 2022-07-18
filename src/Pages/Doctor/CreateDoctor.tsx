@@ -39,12 +39,7 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
   const handlePassword = () => {
     setShowPassword((prev) => !prev);
   };
-  const handleConfirmPassword = () => {
-    setShowConfirmPassword((prev) => !prev);
-  };
-  console.log(doctor, "doctor edit");
-  // for getting current date
-  const current = new Date();
+  console.log(doctor, "doctor");
   //initial state of the form
   const initialState: doctorProps = {
     name: edit ? (doctor?.name ? doctor?.name : "") : "",

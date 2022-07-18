@@ -2,17 +2,9 @@ import React, { useContext, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { DropzoneArea } from "react-mui-dropzone";
 import * as Yup from "yup";
-import {
-  Grid,
-  TextField,
-  IconButton,
-  InputAdornment,
-  Button,
-  Autocomplete,
-} from "@mui/material";
-import { createDoctorProps, doctorProps, patientProps } from "./types";
+import { Grid, TextField } from "@mui/material";
+import { createPatientProps, patientProps } from "./types";
 import { useAppDispatch } from "../../Utils/appHooks";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
 import TextError from "../../Components/TextError/TextError";
 import { useAppSelector } from "../../Utils/appHooks";
 import { useAppStyles } from "../../Utils/AppStyles";
@@ -20,7 +12,7 @@ import AppButton from "../../Components/Button/AppButton";
 import { getAge } from "../../Utils/dateConverter";
 import { createPatient, updatePatient } from "../../Redux/Patient/thunk";
 import { patientSelector } from "../../Redux/Patient/selector";
-const CreatePatient = ({ setShowModal }: createDoctorProps) => {
+const CreatePatient = ({ setShowModal }: createPatientProps) => {
   const { edit, patient, loading } = useAppSelector(patientSelector);
   // props
   const dispatch = useAppDispatch();
