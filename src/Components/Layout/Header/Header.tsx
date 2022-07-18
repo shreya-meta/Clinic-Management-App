@@ -89,7 +89,7 @@ const Header = ({ search, setSearch }: any) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <Link to="/profile" className={classes.menuLink}>
+          <Link to="/" className={classes.menuLink}>
             <MenuItem onClick={handleClose}>
               <PersonIcon color="primary" />
               Profile

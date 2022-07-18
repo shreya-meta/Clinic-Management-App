@@ -12,7 +12,7 @@ const PrivateRoutes = () => {
     <>
       <Suspense fallback={<></>}>
         <Switch>
-          <ProtectedRoutes exact path="/profile" component={Profile} />
+          <ProtectedRoutes exact path="/" component={Profile} />
           <ProtectedRoutes exact path="/doctor" component={Doctor} />
         </Switch>
       </Suspense>
