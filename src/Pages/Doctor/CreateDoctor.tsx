@@ -23,6 +23,7 @@ import {
 } from "../../Redux/Doctor/thunk";
 import { useAppStyles } from "../../Utils/AppStyles";
 import AppButton from "../../Components/Button/AppButton";
+import { getBase64 } from "../../Utils/AppUtils";
 const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
   const { edit, doctor, specialities, loading } =
     useAppSelector(doctorsSelector);
@@ -88,17 +89,6 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
   //load speciality options
   const loadSpecialityOptions = () =>
     specialities?.length === 0 && dispatch(getSpecialities());
-  //function to convert file into base 64
-  const getBase64 = (file: any, cb: any) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      cb(reader.result);
-    };
-    reader.onerror = (error) => {
-      console.log("Error: ", error);
-    };
-  };
   return (
     <>
       <Grid className={classes.root}>
