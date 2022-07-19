@@ -1,17 +1,11 @@
 import { memo } from "react";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
-import { Box, TableRow, TableSortLabel } from "@mui/material";
-import { TableHeadProps } from "./types";
-import { MouseEvent, useContext } from "react";
-import { AppContext } from "../../Utils/AppUtils";
+import { TableRow } from "@mui/material";
+import { useContext } from "react";
 import { AppTableContext } from "./AppTable";
-const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
-  const { columns, orderBy, order, types } = useContext(AppTableContext);
-  console.log(columns, "test columns");
-  const createSortHandler = (property: any) => (event: MouseEvent<unknown>) => {
-    onRequestSort(event, property);
-  };
+const AppTableHead = () => {
+  const { columns, types } = useContext(AppTableContext);
   return (
     <>
       <TableHead>
@@ -22,22 +16,8 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
               key={headCell.id}
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderBy === headCell.id ? order : false}
             >
-              <TableSortLabel
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : "asc"}
-                onClick={createSortHandler(headCell.id)}
-              >
-                {headCell.label}
-                {orderBy === headCell.id ? (
-                  <Box component="span">
-                    {order === "desc"
-                      ? "sorted descending"
-                      : "sorted ascending"}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
+              {headCell.label}
             </TableCell>
           ))}
           {types !== "appointment" && <TableCell>Actions</TableCell>}

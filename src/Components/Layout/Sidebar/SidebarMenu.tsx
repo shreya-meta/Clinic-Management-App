@@ -15,12 +15,16 @@ import {
 import { clinicSidebarData } from "./SidebarData";
 import { AppContext } from "../../../Utils/AppUtils";
 import { Grid } from "@mui/material";
+import { useAppSelector } from "../../../Utils/appHooks";
+import { loginSelector } from "../../../Redux/Login/selector";
 
 const SidebarMenu = () => {
   const { open } = useContext(AppContext);
+  const { userRole } = useAppSelector(loginSelector);
   const isSuperuser = true;
   const [search, setSearch] = useState("");
   const classes = useStyles();
+
   return (
     <Drawer variant="permanent" open={open}>
       <>

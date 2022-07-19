@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -63,13 +63,13 @@ const Login = () => {
       .required("Please enter your password")
       .min(4, "Password should be at least 4 characters"),
   });
+  useEffect(() => {
+    dispatch(getDoctors());
+  }, []);
   // submit handler
   const onSubmit = (values: any) => {
     const { email, password } = values;
     // get data only if email doesn't match with admin email
-    email !== "admin@admin.com" &&
-      password !== "root" &&
-      dispatch(getDoctors());
     let authenticatedDoctor = doctors.some(
       (doctor: doctorProps) =>
         doctor.email === email && doctor.password === password

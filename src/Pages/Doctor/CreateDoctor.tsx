@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, Form, ErrorMessage } from "formik";
 import { DropzoneArea } from "react-mui-dropzone";
 import * as Yup from "yup";
 import {
@@ -7,13 +7,11 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  Button,
   Autocomplete,
 } from "@mui/material";
 import { createDoctorProps, doctorProps, specialityProps } from "./types";
 import { useAppDispatch } from "../../Utils/appHooks";
 import { doctorsSelector } from "../../Redux/Doctor/selector";
-import { AppContext } from "../../Utils/AppUtils";
 import TextError from "../../Components/TextError/TextError";
 import { useAppSelector } from "../../Utils/appHooks";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -28,18 +26,14 @@ import AppButton from "../../Components/Button/AppButton";
 const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
   const { edit, doctor, specialities, loading } =
     useAppSelector(doctorsSelector);
-  console.log(specialities, "specialities");
-
   // props
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   //for visibility if password and confirm password
   const handlePassword = () => {
     setShowPassword((prev) => !prev);
   };
-  console.log(doctor, "doctor");
   //initial state of the form
   const initialState: doctorProps = {
     name: edit ? (doctor?.name ? doctor?.name : "") : "",
@@ -80,6 +74,7 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
           ),
     speciality: Yup.array().min(1, "Required."),
   });
+  //submit form values
   const onSubmit = (values: doctorProps) => {
     if (edit) {
       // dispatching update action
@@ -90,15 +85,17 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
     }
     setShowModal(false);
   };
+  //load speciality options
   const loadSpecialityOptions = () =>
     specialities?.length === 0 && dispatch(getSpecialities());
+  //function to convert file into base 64
   const getBase64 = (file: any, cb: any) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function () {
+    reader.onload = () => {
       cb(reader.result);
     };
-    reader.onerror = function (error) {
+    reader.onerror = (error) => {
       console.log("Error: ", error);
     };
   };

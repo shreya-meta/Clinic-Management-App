@@ -1,4 +1,4 @@
-import { createContext, memo, MouseEvent, useContext, useState } from "react";
+import { createContext, memo, useContext } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,30 +12,12 @@ import Pagination from "./Pagination";
 
 export const AppTableContext = createContext<any>("");
 const AppTable = ({ columns, rowsValue }: TableProps) => {
-  const {
-    // orderBy,
-    // order,
-    page,
-    setPage,
-    rowsPerPage,
-    setRowsPerPage,
-    types,
-  } = useContext(AppContext);
-  // const [order, setOrder] = useState<Order>("asc");
-  // const [orderBy, setOrderBy] = useState<keyof TableData>("calories");
-
-  const handleRequestSort = (event: MouseEvent<unknown>, property: any) => {
-    // const isAsc = orderBy === property && order === "asc";
-    // setOrder(isAsc ? "desc" : "asc");
-    // setOrderBy(property);
-  };
+  const { types } = useContext(AppContext);
   //provided value to the child component
   const providerValue = {
     columns,
     types,
     rowsValue,
-    // orderBy,
-    // order,
   };
 
   return (
@@ -49,7 +31,7 @@ const AppTable = ({ columns, rowsValue }: TableProps) => {
               size={"small"}
             >
               {/* table head */}
-              <AppTableHead onRequestSort={handleRequestSort} />
+              <AppTableHead />
               <TableBody>
                 {/* table body */}
                 <AppTableBody />

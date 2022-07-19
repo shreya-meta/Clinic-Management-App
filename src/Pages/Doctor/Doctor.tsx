@@ -17,12 +17,14 @@ const Doctor = () => {
     { id: "specialityDisplay", label: "Speciality" },
   ];
   //display speciality in chip
-  const rowsValue = doctors.map((row: doctorProps) => ({
-    ...row,
-    specialityDisplay: row?.speciality?.map((speciality: specialityProps) => {
-      return <Chip label={speciality?.name} key={speciality?.id} />;
-    }),
-  }));
+  const rowsValue = doctors.map((row: doctorProps) => {
+    return {
+      ...row,
+      specialityDisplay: row?.speciality?.map((speciality: specialityProps) => {
+        return <Chip label={speciality?.name} key={speciality?.id} />;
+      }),
+    };
+  });
   // const rowsValue=
   return (
     <>

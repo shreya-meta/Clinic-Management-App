@@ -1,11 +1,16 @@
 import { MouseEvent } from "react";
-import { doctorColumn, doctorListingProps } from "../../Pages/Doctor/types";
+import { appointmentProps } from "../../Pages/Appointment/types";
+import { doctorProps } from "../../Pages/Doctor/types";
+import { patientProps } from "../../Pages/Patient/types";
 
 export interface TableHeadProps {
   onRequestSort: (event: MouseEvent<unknown>, property: any) => void;
 }
-export interface TableProps {
+
+export interface rowsValueProps {
+  rowsValue: doctorProps[] | patientProps[] | appointmentProps[];
+}
+export interface TableProps extends rowsValueProps {
   columns: any;
-  rowsValue: any;
 }
 export type Order = "asc" | "desc";

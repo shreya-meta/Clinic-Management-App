@@ -69,6 +69,7 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                       name="name"
                       autoFocus
                       value={values.name}
+                      required
                       id="name"
                       label="Name"
                       size="small"
@@ -85,6 +86,7 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                       name="dobDate"
                       label="Date of Birth"
                       type="date"
+                      required
                       value={values.dobDate}
                       variant="outlined"
                       InputLabelProps={{
@@ -120,6 +122,7 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                       value={values.sex}
                       id="Sex"
                       label="sex"
+                      required
                       size="small"
                       variant="outlined"
                       onChange={(e) => {
@@ -135,6 +138,7 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                       value={values.location}
                       id="location"
                       label="Location"
+                      required
                       size="small"
                       variant="outlined"
                       onChange={(e) => {

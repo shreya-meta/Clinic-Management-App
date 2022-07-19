@@ -24,3 +24,15 @@ export const clinicSidebarData = [
     ],
   },
 ];
+export const clinicDoctorSidebarData = [
+  {
+    name: "Doctor Setup",
+    Icon: LibraryBooksIcon,
+    items: [
+      {
+        name: "Appointment ",
+        link: "/appointment",
+      },
+    ],
+  },
+];
