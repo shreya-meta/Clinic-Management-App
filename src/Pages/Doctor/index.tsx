@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
 import CreateDoctor from "./CreateDoctor";
 import Doctor from "./Doctor";
-import { doctorProps } from "./types";
+import { doctorProps, specialityProps } from "./types";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
 
 const DoctorListing = () => {
@@ -58,15 +58,22 @@ const DoctorListing = () => {
     setRowsPerPage,
     types,
   };
-  console.log(doctors, "doctors in index page");
   useEffect(() => {
-    let searchedValue = doctors.filter((row: doctorProps) => {
-      const { name, speciality } = row;
-      return name.toLowerCase().includes(search.toLowerCase());
-    });
     if (search === "") {
       dispatch(getDoctors());
     } else {
+      // filter with searched values
+      let searchedValue = doctors.filter((row: doctorProps) => {
+        const { name, speciality } = row;
+        return (
+          name.toLowerCase().includes(search.toLowerCase()) ||
+          speciality?.some((speciality: specialityProps) => {
+            return speciality?.name
+              ?.toLowerCase()
+              .includes(search.toLowerCase());
+          })
+        );
+      });
       dispatch(getSearchedDataSuccessAction(searchedValue));
     }
     // : dispatch(searchDoctors());

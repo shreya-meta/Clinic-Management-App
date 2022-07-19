@@ -192,7 +192,6 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                         <TextField
                           className={classes.textWidth}
                           name="slot"
-                          autoFocus
                           value={values.slot}
                           id="slot"
                           label="Slot"

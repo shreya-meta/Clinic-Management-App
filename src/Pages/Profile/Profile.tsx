@@ -11,61 +11,77 @@ const ProfileInfo = () => {
         <CardContent>
           <Grid container spacing={2}>
             {userRole === "doctor" && (
-              <>
-                <Grid item xs={6}>
-                  <TextField
-                    className={classes.textWidth}
-                    value={loggedUser?.visiting_hours}
-                    autoFocus
-                    id="visiting_hours"
-                    label="Visiting Hours"
-                    size="small"
-                    variant="outlined"
-                    disabled
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    className={classes.textWidth}
-                    name="email"
-                    value={loggedUser?.phone_no}
-                    autoFocus
-                    id="email"
-                    label="Email"
-                    size="small"
-                    variant="outlined"
-                    disabled
-                  />
-                </Grid>
-              </>
+              <Grid item xs={6}>
+                <img
+                  src={loggedUser?.picture?.replace(
+                    "data:text/plain",
+                    `data:${loggedUser.type}`
+                  )}
+                  alt=""
+                  className="img-thumbnail mt-1"
+                  height={80}
+                  width={100}
+                />
+              </Grid>
             )}
-            <Grid item xs={6}>
-              <TextField
-                className={classes.textWidth}
-                name="name"
-                value={userRole === "admin" ? "Admin" : loggedUser?.name}
-                autoFocus
-                id="name"
-                label="Name"
-                size="small"
-                variant="outlined"
-                disabled
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                className={classes.textWidth}
-                name="email"
-                value={
-                  userRole === "admin" ? "admin@admin.com" : loggedUser?.email
-                }
-                autoFocus
-                id="email"
-                label="Email"
-                size="small"
-                variant="outlined"
-                disabled
-              />
+            <Grid container spacing={2}>
+              {userRole === "doctor" && (
+                <>
+                  <Grid item xs={6} sx={{ mt: 2 }}>
+                    <TextField
+                      className={classes.textWidth}
+                      value={loggedUser?.visiting_hours}
+                      autoFocus
+                      id="visiting_hours"
+                      label="Visiting Hours"
+                      size="small"
+                      variant="outlined"
+                      disabled
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      className={classes.textWidth}
+                      name="email"
+                      value={loggedUser?.phone_no}
+                      autoFocus
+                      id="email"
+                      label="Email"
+                      size="small"
+                      variant="outlined"
+                      disabled
+                    />
+                  </Grid>
+                </>
+              )}
+              <Grid item xs={6} sx={{ mt: 1 }}>
+                <TextField
+                  className={classes.textWidth}
+                  name="name"
+                  value={userRole === "admin" ? "Admin" : loggedUser?.name}
+                  autoFocus
+                  id="name"
+                  label="Name"
+                  size="small"
+                  variant="outlined"
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={6} sx={{ mt: 1 }}>
+                <TextField
+                  className={classes.textWidth}
+                  name="email"
+                  value={
+                    userRole === "admin" ? "admin@admin.com" : loggedUser?.email
+                  }
+                  autoFocus
+                  id="email"
+                  label="Email"
+                  size="small"
+                  variant="outlined"
+                  disabled
+                />
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>

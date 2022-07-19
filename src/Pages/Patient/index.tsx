@@ -59,14 +59,14 @@ const PatientListing = () => {
     types,
   };
   useEffect(() => {
-    let searchedValue = patients.filter((row: patientProps) => {
-      const { name } = row;
-      return name.toLowerCase().includes(search.toLowerCase());
-    });
     dispatch(getAppointments());
     if (search === "") {
       dispatch(getPatients());
     } else {
+      let searchedValue = patients.filter((row: patientProps) => {
+        const { name } = row;
+        return name.toLowerCase().includes(search.toLowerCase());
+      });
       dispatch(getSearchedDataSuccessAction(searchedValue));
     }
     // : dispatch(searchDoctors());
