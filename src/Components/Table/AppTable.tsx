@@ -12,6 +12,8 @@ import Pagination from "./Pagination";
 
 export const AppTableContext = createContext<any>("");
 const AppTable = ({ columns, rowsValue }: TableProps) => {
+  // const { patients, loadingPatient, edit, appointmentModal } =
+  //   useAppSelector(patientSelector);
   const { types } = useContext(AppContext);
   //provided value to the child component
   const providerValue = {
@@ -19,7 +21,7 @@ const AppTable = ({ columns, rowsValue }: TableProps) => {
     types,
     rowsValue,
   };
-
+  console.log(rowsValue, "rowsValue");
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>

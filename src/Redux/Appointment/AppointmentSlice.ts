@@ -4,6 +4,7 @@ export interface AppointmentState {
   loading: boolean;
   edit: boolean;
   appointments: appointmentProps[];
+  filteredAppointments: appointmentProps[];
   appointment: appointmentProps | null;
   loadingAppointment: boolean;
 }
@@ -12,6 +13,7 @@ const initialState: AppointmentState = {
   loading: false,
   edit: false,
   appointments: [],
+  filteredAppointments: [],
   appointment: null,
   loadingAppointment: false,
 };
@@ -62,8 +64,8 @@ const AppointmentSlice = createSlice({
       state.appointments = payload;
     },
     filterAppointmentsByPatientAction: (state, { payload }) => {
-      state.appointments = state.appointments?.filter(
-        (appointment) => appointment?.patient?.id === payload
+      state.filteredAppointments = state.appointments?.filter(
+        (appointment) => +appointment?.patient?.id! === +payload
       );
     },
   },

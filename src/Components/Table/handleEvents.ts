@@ -4,7 +4,10 @@ import {
   filterAppointmentsByPatientAction,
 } from "../../Redux/Appointment/AppointmentSlice";
 import { doctorEditSuccessAction } from "../../Redux/Doctor/DoctorSlice";
-import { patientEditSuccessAction } from "../../Redux/Patient/PatientSlice";
+import {
+  appointmentStateAction,
+  patientEditSuccessAction,
+} from "../../Redux/Patient/PatientSlice";
 import { AppDispatch } from "../../Store";
 
 export const handleEdit = (
@@ -35,6 +38,7 @@ export const handleView = (
   dispatch: AppDispatch,
   setShowModal: Dispatch<SetStateAction<boolean>>
 ) => {
-  filterAppointmentsByPatientAction(id);
-  // setShowModal(true);
+  dispatch(filterAppointmentsByPatientAction(id));
+  dispatch(appointmentStateAction());
+  setShowModal(true);
 };

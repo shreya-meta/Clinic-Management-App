@@ -194,7 +194,7 @@
         "addedPicture": {}
       },
       "feedback": "Will be available this eveninff this test",
-      "isComplete": false,
+      "isComplete": true,
       "patientDisplay": "shreya",
       "doctorDisplay": "Ram  Thapa",
       "id": 1

@@ -7,6 +7,7 @@ export interface PatientState {
   patients: patientProps[];
   patient: patientProps | null;
   loadingPatient: boolean;
+  appointmentModal: boolean;
 }
 //initialize state
 const initialState: PatientState = {
@@ -15,6 +16,7 @@ const initialState: PatientState = {
   patients: [],
   patient: null,
   loadingPatient: false,
+  appointmentModal: false,
 };
 const patientSlice = createSlice({
   name: "patient",
@@ -58,6 +60,10 @@ const patientSlice = createSlice({
     clearPatientDataAction: (state) => {
       state.edit = false;
       state.loading = false;
+      state.appointmentModal = false;
+    },
+    appointmentStateAction: (state) => {
+      state.appointmentModal = true;
     },
   },
 });
@@ -75,6 +81,7 @@ export const {
   updatePatientFailAction,
   getSearchedDataSuccessAction,
   clearPatientDataAction,
+  appointmentStateAction,
 } = patientSlice.actions;
 // export reducer
 export default patientSlice.reducer;

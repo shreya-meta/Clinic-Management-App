@@ -1,19 +1,24 @@
 import React from "react";
 import ModalTitle from "./ModalTitle";
 import { ModalProps } from "./types";
-import { Dialog, DialogContent, Typography } from "@mui/material";
+import { Dialog, DialogContent } from "@mui/material";
+import { useAppDispatch } from "../../Utils/appHooks";
+import { clearPatientDataAction } from "../../Redux/Patient/PatientSlice";
 
 const Modal = ({ modalValue, children, maxWidth }: ModalProps) => {
+  const dispatch = useAppDispatch();
   const { showModal, types, setShowModal, edit, title } = modalValue;
+  // const { appointmentModal } = useAppSelector(patientSelector);
   const handleClose = () => {
     // clearViewDetailData?.includes(types)
     setShowModal(false);
+    types === "view" && dispatch(clearPatientDataAction());
   };
 
   //for checking title to display or not when state is in edit mode
-  const checkTitleToDisplayInEdit = ["quickUpdate"];
+  const checkTitleToDisplayInEdit = ["quickUpdate", "view"];
   //for checking title to display or not when state is in create mode
-  const checkTitleToDisplay = ["print"];
+  const checkTitleToDisplay = ["view"];
   return (
     <div>
       <Dialog

@@ -25,9 +25,7 @@ const store = configureStore({
   //  ignore all the action types it dispatches:
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }),
 });
 //store your redux reducers using redux persist

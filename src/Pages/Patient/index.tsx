@@ -1,11 +1,13 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import Layout from "../../Components/Layout";
+import { getAppointments } from "../../Redux/Appointment/thunk";
 import { getSearchedDataSuccessAction } from "../../Redux/Patient/PatientSlice";
 import { clearPatientDataAction } from "../../Redux/Patient/PatientSlice";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { getPatients } from "../../Redux/Patient/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
+import ViewAppointment from "./ViewAppointment";
 import CreatePatient from "./CreatePatient";
 import Patient from "./Patient";
 import { patientProps } from "./types";
@@ -23,7 +25,8 @@ const PatientListing = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // initialize the redux hook
   const dispatch = useAppDispatch();
-  const { patients, loadingPatient, edit } = useAppSelector(patientSelector);
+  const { patients, loadingPatient, edit, appointmentModal } =
+    useAppSelector(patientSelector);
   // const { doctors, loading } = useSelector(doctorsSelector);
   // console.log(doctors, "doctors");
   //state for searching
@@ -38,12 +41,15 @@ const PatientListing = () => {
     setShowModal,
     title,
   };
+  const AppointmentModalValue = {
+    edit: false,
+    showModal,
+    types: "view",
+    setShowModal,
+    title: " View Appointment History",
+  };
   // dispatch our thunk when component first mounts
 
-  useEffect(() => {
-    console.log("inside useEffect");
-    dispatch(getPatients());
-  }, [dispatch]);
   const providerValue = {
     setShowModal,
     loadingPatient,
@@ -58,6 +64,7 @@ const PatientListing = () => {
       const { name } = row;
       return name.toLowerCase().includes(search.toLowerCase());
     });
+    dispatch(getAppointments());
     if (search === "") {
       dispatch(getPatients());
     } else {
@@ -80,9 +87,15 @@ const PatientListing = () => {
       </Layout>
       {showModal && (
         <Suspense fallback={<></>}>
-          <Modal modalValue={ModalValue} maxWidth="md">
-            <CreatePatient setShowModal={setShowModal} />
-          </Modal>
+          {!appointmentModal ? (
+            <Modal modalValue={ModalValue} maxWidth="md">
+              <CreatePatient setShowModal={setShowModal} />
+            </Modal>
+          ) : (
+            <Modal modalValue={AppointmentModalValue} maxWidth="md">
+              <ViewAppointment />
+            </Modal>
+          )}
         </Suspense>
       )}
     </>

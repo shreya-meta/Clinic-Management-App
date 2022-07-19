@@ -21,9 +21,6 @@ const Appointment = () => {
   // get filtered data greater than or quals to todays date
   const filterDataByDates = () => {
     return appointments.filter((appointment: appointmentProps) => {
-      console.log(appointment?.slot.substring(0, 9) >= date, "greater than ");
-      console.log("2022-5-15" >= date, "greater than ");
-
       return appointment?.slot.substring(0, 9) >= date;
     });
   };

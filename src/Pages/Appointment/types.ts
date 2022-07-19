@@ -13,6 +13,7 @@ export interface appointmentListingProps {
   doctorDisplay: string;
   slot: string;
   isComplete: boolean;
+  feedback?: string;
 }
 
 export interface specialityProps {
