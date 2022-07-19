@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
-import { Autocomplete, Grid, TextField } from "@mui/material";
+import { Autocomplete, Grid, TextareaAutosize, TextField } from "@mui/material";
 import { appointmentProps, createAppointmentProps } from "./types";
 import { useAppDispatch } from "../../Utils/appHooks";
 import { appointmentSelector } from "../../Redux/Appointment/selector";
@@ -13,6 +13,9 @@ import {
   createAppointment,
   updateAppointment,
 } from "../../Redux/Appointment/thunk";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { doctorProps } from "../Doctor/types";
 import { getDoctors } from "../../Redux/Doctor/thunk";
 import { getPatients } from "../../Redux/Patient/thunk";
@@ -51,12 +54,19 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
     feedback: Yup.string(),
   });
   const onSubmit = (values: any) => {
+    const { patient, doctor } = values;
     if (edit) {
       // dispatching update action
       dispatch(updateAppointment(values, appointment?.id!));
     } else {
       // dispatching create action
-      dispatch(createAppointment(values));
+      dispatch(
+        createAppointment({
+          ...values,
+          patientDisplay: patient?.name,
+          doctorDisplay: doctor?.name,
+        })
+      );
     }
     setShowModal(false);
   };
@@ -68,6 +78,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
     patients?.length === 0 && dispatch(getPatients());
   return (
     <>
+      {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
       <Grid className={classes.root}>
         <Formik
           enableReinitialize={false}
@@ -102,6 +113,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                       id="virtualize-demo"
                       options={doctors}
                       value={values.doctor}
+                      size="small"
                       getOptionLabel={(option) => option?.name}
                       onChange={(e: object, values: doctorProps | null) => {
                         values !== null
@@ -130,6 +142,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                       options={patients}
                       value={values.patient}
                       getOptionLabel={(option) => option?.name}
+                      size="small"
                       onChange={(e: object, values: patientProps | null) => {
                         values !== null
                           ? setFieldValue("patient", values)
@@ -151,9 +164,51 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                     />
                     <ErrorMessage name="patient" component={TextError} />
                   </Grid>
+                  {/* <Grid item xs={6}>
+                    <DateTimePicker
+                      renderInput={(props) => <TextField {...props} />}
+                      label="DateTimePicker"
+                      value={values.slot}
+                      onChange={(newValue) => {
+                        console.log(newValue, "test new values");
+                        setFieldValue("slot", values);
+                      }}
+                    />
+                  </Grid> */}
+                  <Grid item xs={6}>
+                    <TextField
+                      className={classes.textWidth}
+                      name="slot"
+                      autoFocus
+                      value={values.slot}
+                      id="slot"
+                      label="Slot"
+                      size="small"
+                      required
+                      variant="outlined"
+                      onChange={(e) => {
+                        setFieldValue("slot", e.target.value);
+                      }}
+                    />
+                    <ErrorMessage name="name" component={TextError} />
+                  </Grid>
                   <Grid item xs={12}>
-                    <Field type="checkbox" name="active" id="active" />
-                    <label htmlFor="active">Active</label>
+                    <TextareaAutosize
+                      required
+                      value={values.feedback}
+                      aria-label="minimum height"
+                      name="feedback"
+                      minRows={6}
+                      placeholder="Enter Feedback"
+                      onChange={(e) => {
+                        setFieldValue("feedback", e.target.value.trimStart());
+                      }}
+                    />
+                    <ErrorMessage name="feedback" component={TextError} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Field type="checkbox" name="isComplete" id="isComplete" />
+                    <label htmlFor="isComplete">Is Complete</label>
                   </Grid>
                 </Grid>
                 <AppButton title="SAVE" loading={loading} />
@@ -162,6 +217,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
           }}
         </Formik>
       </Grid>
+      {/* </LocalizationProvider> */}
     </>
   );
 };

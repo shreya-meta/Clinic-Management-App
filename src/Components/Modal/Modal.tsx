@@ -5,7 +5,6 @@ import { Dialog, DialogContent, Typography } from "@mui/material";
 
 const Modal = ({ modalValue, children, maxWidth }: ModalProps) => {
   const { showModal, types, setShowModal, edit, title } = modalValue;
-  console.log(types, "types in modal");
   const handleClose = () => {
     // clearViewDetailData?.includes(types)
     setShowModal(false);

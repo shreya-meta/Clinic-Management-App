@@ -28,7 +28,11 @@ const SidebarMenu = () => {
           <Typography
             variant="h6"
             color="common.white"
-            sx={{ lineHeight: "3.1", fontFamily: "system-ui" }}
+            sx={{
+              lineHeight: "3.1",
+              fontFamily: "system-ui",
+              marginLeft: "80px",
+            }}
           >
             CLINIC MGT
           </Typography>

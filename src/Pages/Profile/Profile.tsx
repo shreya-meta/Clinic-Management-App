@@ -6,8 +6,8 @@ import { useDoctorStyles } from "../Doctor/DoctorStyles";
 import { doctorProps } from "../Doctor/types";
 const ProfileInfo = () => {
   const classes = useDoctorStyles();
-  const { loggedUser } = useAppSelector(loginSelector);
-  console.log(loggedUser, "loggedUser");
+  const { loggedUser, userRole } = useAppSelector(loginSelector);
+  console.log(userRole, "test user_role");
   return (
     <>
       <Grid container spacing={2}>
@@ -15,10 +15,23 @@ const ProfileInfo = () => {
           <TextField
             className={classes.textWidth}
             name="name"
-            value={loggedUser?.name}
+            value={userRole === "admin" ? "Admin" : loggedUser?.name}
             autoFocus
             id="name"
             label="Name"
+            size="small"
+            variant="outlined"
+            disabled
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            className={classes.textWidth}
+            name="email"
+            value={userRole === "admin" ? "admin@admin.com" : loggedUser?.email}
+            autoFocus
+            id="email"
+            label="Email"
             size="small"
             variant="outlined"
             disabled

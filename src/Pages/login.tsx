@@ -87,6 +87,10 @@ const Login = () => {
           }
         : "n/a";
     dispatch(login(user_role));
+    console.log(
+      doctors?.find((doctor: doctorProps) => doctor?.email === email),
+      "tets logged user"
+    );
     // const data = { userName, password, branch: branch?.id };
     // dispatch(login(data));
   };
@@ -111,7 +115,6 @@ const Login = () => {
           onSubmit={onSubmit}
         >
           {({ values, setFieldValue, errors }) => {
-            console.log(errors, "erro");
             return (
               <Form autoComplete="off">
                 <Grid>
