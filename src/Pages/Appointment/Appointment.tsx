@@ -14,14 +14,14 @@ const Appointment = () => {
   const globalClassess = useGlobalStyles();
   const dispatch = useAppDispatch();
   // get today date
-  let today = new Date();
-  let date = `${today.getFullYear()}-${
-    today.getMonth() + 1
-  }- ${today.getDate()}`;
-  // get filtered data greater than or quals to todays date
+  // get filtered data greater than or equals to todays date
+  function isDateInFuture(date: number) {
+    return date >= Date.now();
+  }
   const filterDataByDates = () => {
     return appointments.filter((appointment: appointmentProps) => {
-      return appointment?.slot.substring(0, 10) >= date;
+      let appointmentDate = new Date(appointment?.slot.substring(0, 10));
+      return isDateInFuture(+appointmentDate);
     });
   };
   // effect runs if nextAppointment changes

@@ -171,7 +171,7 @@
         "location": "thimi70",
         "id": 1
       },
-      "slot": "2022-8-03 9 am",
+      "slot": "2022-11-03 9 am",
       "doctor": {
         "name": "Sharma",
         "speciality": [
@@ -213,7 +213,7 @@
         "location": "thimi70",
         "id": 1
       },
-      "slot": "2022-9-10",
+      "slot": "2022-9-11",
       "doctor": {
         "name": "Ram  Thapa",
         "speciality": [
@@ -235,7 +235,7 @@
         "id": 1,
         "addedPicture": {}
       },
-      "feedback": "test",
+      "feedback": "testsd",
       "isComplete": false,
       "patientDisplay": "shreya",
       "doctorDisplay": "Ram  Thapa",
