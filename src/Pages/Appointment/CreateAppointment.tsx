@@ -13,19 +13,18 @@ import {
   createAppointment,
   updateAppointment,
 } from "../../Redux/Appointment/thunk";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { doctorProps } from "../Doctor/types";
 import { getDoctors } from "../../Redux/Doctor/thunk";
 import { getPatients } from "../../Redux/Patient/thunk";
 import { doctorsSelector } from "../../Redux/Doctor/selector";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { patientProps } from "../Patient/types";
+import { loginSelector } from "../../Redux/Login/selector";
 const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
   const { edit, appointment, loading } = useAppSelector(appointmentSelector);
   const { doctors } = useAppSelector(doctorsSelector);
   const { patients } = useAppSelector(patientSelector);
+  const { userRole } = useAppSelector(loginSelector);
 
   // props
   const dispatch = useAppDispatch();
@@ -91,80 +90,85 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
             return (
               <Form autoComplete="off" noValidate>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      className={classes.textWidth}
-                      name="name"
-                      autoFocus
-                      value={values.name}
-                      id="name"
-                      label="Name"
-                      size="small"
-                      required
-                      variant="outlined"
-                      onChange={(e) => {
-                        setFieldValue("name", e.target.value.trimStart());
-                      }}
-                    />
-                    <ErrorMessage name="name" component={TextError} />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Autocomplete
-                      id="virtualize-demo"
-                      options={doctors}
-                      value={values.doctor}
-                      size="small"
-                      getOptionLabel={(option) => option?.name}
-                      onChange={(e: object, values: doctorProps | null) => {
-                        values !== null
-                          ? setFieldValue("doctor", values)
-                          : setFieldValue("doctor", null);
-                      }}
-                      isOptionEqualToValue={(option, value) =>
-                        option?.id === value?.id
-                      }
-                      onFocus={() => loadDoctorOptions()}
-                      renderInput={(params) => (
+                  {userRole === "admin" && (
+                    <>
+                      <Grid item xs={6}>
                         <TextField
+                          className={classes.textWidth}
+                          name="name"
+                          autoFocus
+                          value={values.name}
+                          id="name"
+                          label="Name"
+                          size="small"
                           required
-                          {...params}
                           variant="outlined"
-                          label="Doctor"
-                          fullWidth
+                          onChange={(e) => {
+                            setFieldValue("name", e.target.value.trimStart());
+                          }}
                         />
-                      )}
-                    />
-                    <ErrorMessage name="doctor" component={TextError} />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Autocomplete
-                      id="virtualize-demo"
-                      options={patients}
-                      value={values.patient}
-                      getOptionLabel={(option) => option?.name}
-                      size="small"
-                      onChange={(e: object, values: patientProps | null) => {
-                        values !== null
-                          ? setFieldValue("patient", values)
-                          : setFieldValue("patient", null);
-                      }}
-                      isOptionEqualToValue={(option, value) =>
-                        option?.id === value?.id
-                      }
-                      onFocus={() => loadPatientOptions()}
-                      renderInput={(params) => (
-                        <TextField
-                          required
-                          {...params}
-                          variant="outlined"
-                          label="Patient"
-                          fullWidth
+                        <ErrorMessage name="name" component={TextError} />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Autocomplete
+                          id="virtualize-demo"
+                          options={doctors}
+                          value={values.doctor}
+                          size="small"
+                          getOptionLabel={(option) => option?.name}
+                          onChange={(e: object, values: doctorProps | null) => {
+                            values !== null
+                              ? setFieldValue("doctor", values)
+                              : setFieldValue("doctor", null);
+                          }}
+                          isOptionEqualToValue={(option, value) =>
+                            option?.id === value?.id
+                          }
+                          onFocus={() => loadDoctorOptions()}
+                          renderInput={(params) => (
+                            <TextField
+                              required
+                              {...params}
+                              variant="outlined"
+                              label="Doctor"
+                              fullWidth
+                            />
+                          )}
                         />
-                      )}
-                    />
-                    <ErrorMessage name="patient" component={TextError} />
-                  </Grid>
-                  {/* <Grid item xs={6}>
+                        <ErrorMessage name="doctor" component={TextError} />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Autocomplete
+                          id="virtualize-demo"
+                          options={patients}
+                          value={values.patient}
+                          getOptionLabel={(option) => option?.name}
+                          size="small"
+                          onChange={(
+                            e: object,
+                            values: patientProps | null
+                          ) => {
+                            values !== null
+                              ? setFieldValue("patient", values)
+                              : setFieldValue("patient", null);
+                          }}
+                          isOptionEqualToValue={(option, value) =>
+                            option?.id === value?.id
+                          }
+                          onFocus={() => loadPatientOptions()}
+                          renderInput={(params) => (
+                            <TextField
+                              required
+                              {...params}
+                              variant="outlined"
+                              label="Patient"
+                              fullWidth
+                            />
+                          )}
+                        />
+                        <ErrorMessage name="patient" component={TextError} />
+                      </Grid>
+                      {/* <Grid item xs={6}>
                     <DateTimePicker
                       renderInput={(props) => <TextField {...props} />}
                       label="DateTimePicker"
@@ -175,24 +179,26 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                       }}
                     />
                   </Grid> */}
-                  <Grid item xs={6}>
-                    <TextField
-                      className={classes.textWidth}
-                      name="slot"
-                      autoFocus
-                      value={values.slot}
-                      id="slot"
-                      label="Slot"
-                      size="small"
-                      required
-                      variant="outlined"
-                      onChange={(e) => {
-                        setFieldValue("slot", e.target.value);
-                      }}
-                    />
-                    <ErrorMessage name="name" component={TextError} />
-                  </Grid>
-                  <Grid item xs={12}>
+                      <Grid item xs={6}>
+                        <TextField
+                          className={classes.textWidth}
+                          name="slot"
+                          autoFocus
+                          value={values.slot}
+                          id="slot"
+                          label="Slot"
+                          size="small"
+                          required
+                          variant="outlined"
+                          onChange={(e) => {
+                            setFieldValue("slot", e.target.value);
+                          }}
+                        />
+                        <ErrorMessage name="name" component={TextError} />
+                      </Grid>
+                    </>
+                  )}
+                  <Grid item xs={12} sx={{ width: " 100%" }}>
                     <TextareaAutosize
                       required
                       value={values.feedback}
@@ -211,7 +217,10 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                     <label htmlFor="isComplete">Is Complete</label>
                   </Grid>
                 </Grid>
-                <AppButton title="SAVE" loading={loading} />
+                <AppButton
+                  title={userRole === "doctor" ? "COMPLETE" : "SAVE"}
+                  loading={loading}
+                />
               </Form>
             );
           }}

@@ -1,18 +1,11 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import SearchIcon from "@mui/icons-material/Search";
 import List from "@mui/material/List";
 import Sidebar from "./Sidebar";
-import {
-  Drawer,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-  useStyles,
-} from "../LayoutStyles";
-import { clinicSidebarData } from "./SidebarData";
+import { Drawer, Search, StyledInputBase, useStyles } from "../LayoutStyles";
+import { clinicDoctorSidebarData, clinicSidebarData } from "./SidebarData";
 import { AppContext } from "../../../Utils/AppUtils";
 import { Grid } from "@mui/material";
 import { useAppSelector } from "../../../Utils/appHooks";
@@ -21,10 +14,10 @@ import { loginSelector } from "../../../Redux/Login/selector";
 const SidebarMenu = () => {
   const { open } = useContext(AppContext);
   const { userRole } = useAppSelector(loginSelector);
-  const isSuperuser = true;
   const [search, setSearch] = useState("");
   const classes = useStyles();
-
+  const dataToBeLoad =
+    userRole === "admin" ? clinicSidebarData : clinicDoctorSidebarData;
   return (
     <Drawer variant="permanent" open={open}>
       <>
@@ -59,7 +52,7 @@ const SidebarMenu = () => {
             </Grid>
           )}
         </ListItem>
-        {clinicSidebarData?.map((item: any, index: number) => {
+        {dataToBeLoad?.map((item: any, index: number) => {
           return (
             <Fragment key={index}>
               <Sidebar

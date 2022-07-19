@@ -58,6 +58,14 @@ const AppointmentSlice = createSlice({
       state.edit = false;
       state.loading = false;
     },
+    filterAppointmentsByDateAction: (state, { payload }) => {
+      state.appointments = payload;
+    },
+    filterAppointmentsByPatientAction: (state, { payload }) => {
+      state.appointments = state.appointments?.filter(
+        (appointment) => appointment?.patient?.id === payload
+      );
+    },
   },
 });
 
@@ -74,6 +82,8 @@ export const {
   updateAppointmentFailAction,
   getSearchedDataSuccessAction,
   clearAppointmentDataAction,
+  filterAppointmentsByDateAction,
+  filterAppointmentsByPatientAction,
 } = AppointmentSlice.actions;
 // export reducer
 export default AppointmentSlice.reducer;

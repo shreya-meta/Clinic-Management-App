@@ -21,6 +21,7 @@ const AppTableHead = () => {
             </TableCell>
           ))}
           {types !== "appointment" && <TableCell>Actions</TableCell>}
+          {types === "patient" && <TableCell>History </TableCell>}
         </TableRow>
       </TableHead>
     </>

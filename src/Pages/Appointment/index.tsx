@@ -50,8 +50,8 @@ const AppointmentListing = () => {
   // dispatch our thunk when component first mounts
   useEffect(() => {
     let searchedValue = appointments.filter((row: appointmentProps) => {
-      const { name } = row;
-      return name.toLowerCase().includes(search.toLowerCase());
+      const { slot } = row;
+      return slot.toLowerCase().includes(search.toLowerCase());
     });
     if (search === "") {
       dispatch(getAppointments());

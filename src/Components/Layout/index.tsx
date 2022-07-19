@@ -12,6 +12,8 @@ import Header from "./Header/Header";
 import { useStyles } from "./LayoutStyles";
 import { useGlobalStyles } from "../GlobalStyles/GlobalStyles";
 import SidebarMenu from "./Sidebar/SidebarMenu";
+import { loginSelector } from "../../Redux/Login/selector";
+import { useAppSelector } from "../../Utils/appHooks";
 const Layout = ({
   handleClickOpen,
   children,
@@ -19,7 +21,8 @@ const Layout = ({
   title,
   types,
 }: any) => {
-  console.log(children, "children");
+  const { userRole } = useAppSelector(loginSelector);
+
   const [open, setOpen] = useState(false);
   const providerValue = { open, setOpen };
   const classes = useStyles();
@@ -39,7 +42,7 @@ const Layout = ({
                 {title}
               </Typography>
             </Grid>
-            {types !== "profile" && (
+            {userRole === "admin" && types !== "profile" && (
               <Grid container justifyContent="flex-end">
                 <Button
                   variant="contained"
@@ -50,7 +53,6 @@ const Layout = ({
                 </Button>
               </Grid>
             )}
-
             <Divider />
             <CardContent>{children}</CardContent>
           </Card>
