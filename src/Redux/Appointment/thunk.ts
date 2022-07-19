@@ -40,6 +40,7 @@ export const updateAppointment =
       dispatch(action.loadingCreateAppointmentAction());
       await API.updateAppointment(body, id);
       dispatch(alertSuccessAction("Appointment Updated Successfully"));
+      dispatch(getAppointments());
       dispatch(action.updateAppointmentSuccessAction());
     } catch (error) {
       dispatch(action.updateAppointmentFailAction());

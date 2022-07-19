@@ -14,6 +14,7 @@ export interface appointmentListingProps {
   slot: string;
   isComplete: boolean;
   feedback?: string;
+  isCompleteDisplay?: string;
 }
 
 export interface specialityProps {

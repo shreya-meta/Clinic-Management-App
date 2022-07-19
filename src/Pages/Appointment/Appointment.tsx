@@ -21,7 +21,7 @@ const Appointment = () => {
   // get filtered data greater than or quals to todays date
   const filterDataByDates = () => {
     return appointments.filter((appointment: appointmentProps) => {
-      return appointment?.slot.substring(0, 9) >= date;
+      return appointment?.slot.substring(0, 10) >= date;
     });
   };
   // effect runs if nextAppointment changes
@@ -33,13 +33,17 @@ const Appointment = () => {
   const handleFilterByDate = () => {
     setNextAppointment((prev) => !prev);
   };
+  const rowsValue = appointments?.map((appointment: appointmentProps) => ({
+    ...appointment,
+    isCompleteDisplay: appointment?.isComplete ? "Yes" : "No",
+  }));
   // table rows
   const columns: appointmentColumn[] = [
     { id: "name", label: "Name" },
     { id: "patientDisplay", label: "Patient" },
     { id: "doctorDisplay", label: "Doctor" },
     { id: "slot", label: "Slot" },
-    { id: "isComplete", label: "Is Complete" },
+    { id: "isCompleteDisplay", label: "Is Complete" },
   ];
   return (
     <>
@@ -50,7 +54,7 @@ const Appointment = () => {
       >
         {nextAppointment ? "All Appointment" : "Next Appointment"}
       </Button>
-      <AppTable columns={columns} rowsValue={appointments} />
+      <AppTable columns={columns} rowsValue={rowsValue} />
     </>
   );
 };

@@ -19,7 +19,6 @@ const PatientListing = () => {
   //Handle Open Modal
   const handleClickOpen = () => {
     setShowModal(true);
-    dispatch(clearPatientDataAction());
   };
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);

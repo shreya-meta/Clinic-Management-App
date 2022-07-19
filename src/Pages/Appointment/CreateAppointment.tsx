@@ -56,7 +56,16 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
     const { patient, doctor } = values;
     if (edit) {
       // dispatching update action
-      dispatch(updateAppointment(values, appointment?.id!));
+      dispatch(
+        updateAppointment(
+          {
+            ...values,
+            patientDisplay: patient?.name,
+            doctorDisplay: doctor?.name,
+          },
+          appointment?.id!
+        )
+      );
     } else {
       // dispatching create action
       dispatch(
