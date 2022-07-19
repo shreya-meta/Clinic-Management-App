@@ -124,14 +124,6 @@
       "sex": "female",
       "location": "thimi70",
       "id": 1
-    },
-    {
-      "name": "Neeket",
-      "dobDate": "2022-07-15",
-      "age": "3 days",
-      "sex": "123",
-      "location": "test",
-      "id": 2
     }
   ],
   "appointments": []

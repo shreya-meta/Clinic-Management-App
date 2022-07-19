@@ -60,14 +60,14 @@ const DoctorListing = () => {
   };
   console.log(doctors, "doctors in index page");
   useEffect(() => {
-    let searchedvalue = doctors.filter((row: doctorProps) => {
+    let searchedValue = doctors.filter((row: doctorProps) => {
       const { name, speciality } = row;
       return name.toLowerCase().includes(search.toLowerCase());
     });
     if (search === "") {
       dispatch(getDoctors());
     } else {
-      dispatch(getSearchedDataSuccessAction(searchedvalue));
+      dispatch(getSearchedDataSuccessAction(searchedValue));
     }
     // : dispatch(searchDoctors());
   }, [search, dispatch]);

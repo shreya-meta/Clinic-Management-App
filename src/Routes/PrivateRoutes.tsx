@@ -21,7 +21,7 @@ const PrivateRoutes = () => {
             path="/patient-registration"
             component={Patient}
           />
-          {/* <ProtectedRoutes exact path="/appointment" component={Appointment} />{" "} */}
+          <ProtectedRoutes exact path="/appointment" component={Appointment} />
         </Switch>
       </Suspense>
     </>

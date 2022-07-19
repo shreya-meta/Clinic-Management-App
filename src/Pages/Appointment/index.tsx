@@ -2,21 +2,19 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Layout from "../../Components/Layout";
-import AppTable from "../../Components/Table/AppTable";
 import {
   clearDoctorDataAction,
   getSearchedDataSuccessAction,
 } from "../../Redux/Doctor/DoctorSlice";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
-import { getDoctors } from "../../Redux/Doctor/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
 import CreateAppointment from "./CreateAppointment";
 import Appointment from "./Appointment";
-import { doctorProps } from "./types";
+import { appointmentProps } from "./types";
+import { appointmentSelector } from "../../Redux/Appointment/selector";
+import { getAppointments } from "../../Redux/Appointment/thunk";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
-
-const DoctorListing = () => {
+const AppointmentListing = () => {
   // state for opening and closing Modal
   const [showModal, setShowModal] = useState(false);
   //Handle Open Modal
@@ -28,14 +26,11 @@ const DoctorListing = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // initialize the redux hook
   const dispatch = useAppDispatch();
-  const { doctors, loading, edit } = useAppSelector(doctorsSelector);
-  // const { doctors, loading } = useSelector(doctorsSelector);
-  // console.log(doctors, "doctors");
+  const { appointments, loading, edit } = useAppSelector(appointmentSelector);
   //state for searching
   const [search, setSearch] = useState("");
-  console.log(search, "test search");
-  const types = "doctor";
-  const title = "Doctor";
+  const types = "appointment";
+  const title = "Appointment";
   const ModalValue = {
     edit,
     showModal,
@@ -43,12 +38,6 @@ const DoctorListing = () => {
     setShowModal,
     title,
   };
-  // dispatch our thunk when component first mounts
-
-  useEffect(() => {
-    console.log("inside useEffect");
-    dispatch(getDoctors());
-  }, [dispatch]);
   const providerValue = {
     setShowModal,
     loading,
@@ -58,18 +47,17 @@ const DoctorListing = () => {
     setRowsPerPage,
     types,
   };
-  console.log(doctors, "doctors in index page");
+  // dispatch our thunk when component first mounts
   useEffect(() => {
-    let searchedvalue = doctors.filter((row: doctorProps) => {
-      const { name, speciality } = row;
+    let searchedValue = appointments.filter((row: appointmentProps) => {
+      const { name } = row;
       return name.toLowerCase().includes(search.toLowerCase());
     });
     if (search === "") {
-      dispatch(getDoctors());
+      dispatch(getAppointments());
     } else {
-      dispatch(getSearchedDataSuccessAction(searchedvalue));
+      dispatch(getSearchedDataSuccessAction(searchedValue));
     }
-    // : dispatch(searchDoctors());
   }, [search, dispatch]);
   return (
     <>
@@ -95,4 +83,4 @@ const DoctorListing = () => {
   );
 };
 
-export default React.memo(DoctorListing);
+export default React.memo(AppointmentListing);

@@ -1,34 +1,33 @@
 import { Dispatch } from "react";
+import { doctorProps } from "../Doctor/types";
+import { patientProps } from "../Patient/types";
 
-export interface doctorColumn {
-  id: keyof doctorListingProps;
+export interface appointmentColumn {
+  id: keyof appointmentListingProps;
   label: string;
   minWidth?: number;
 }
-export interface doctorListingProps {
+export interface appointmentListingProps {
   name: string;
-  visiting_hours: string;
-  phone_no: string;
-  speciality: specialityProps;
+  patientDisplay: string;
+  doctorDisplay: string;
+  slot: string;
+  isComplete: boolean;
 }
 
 export interface specialityProps {
   id: number;
   name: string;
 }
-export interface doctorProps {
+export interface appointmentProps {
   id?: number;
   name: string;
-  speciality: specialityProps[];
-  // speciality: string;
-  visiting_hours: string;
-  email: string;
-  password?: string;
-  picture: string | null;
-  type?: string;
-  phone_no: string;
-  addedPicture?: File;
+  patient: patientProps | null;
+  slot: string;
+  doctor: doctorProps | null;
+  feedback: string;
+  isComplete: boolean;
 }
-export interface createDoctorProps {
+export interface createAppointmentProps {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
 }

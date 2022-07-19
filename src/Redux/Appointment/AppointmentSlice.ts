@@ -1,87 +1,79 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { doctorProps, specialityProps } from "../../Pages/Doctor/types";
-
-export interface DoctorState {
+import { appointmentProps } from "../../Pages/Appointment/types";
+export interface AppointmentState {
   loading: boolean;
   edit: boolean;
-  doctors: doctorProps[];
-  doctor: doctorProps | null;
-  specialities: specialityProps[];
-  loadingSpeciality: boolean;
+  appointments: appointmentProps[];
+  appointment: appointmentProps | null;
+  loadingAppointment: boolean;
 }
 //initialize state
-const initialState: DoctorState = {
+const initialState: AppointmentState = {
   loading: false,
   edit: false,
-  doctors: [],
-  doctor: null,
-  specialities: [],
-  loadingSpeciality: false,
+  appointments: [],
+  appointment: null,
+  loadingAppointment: false,
 };
-const doctorSlice = createSlice({
-  name: "doctor",
+const AppointmentSlice = createSlice({
+  name: "appointment",
   initialState,
   reducers: {
-    loadingDoctorAction: (state) => {
+    loadingAppointmentAction: (state) => {
+      state.loadingAppointment = true;
+    },
+    loadingCreateAppointmentAction: (state) => {
       state.loading = true;
     },
-    getDoctorSuccessAction: (state, { payload }) => {
-      state.doctors = payload;
+    getAppointmentSuccessAction: (state, { payload }) => {
+      state.appointments = payload;
+      state.loadingAppointment = false;
+    },
+    getAppointmentFailAction: (state) => {
+      state.loadingAppointment = false;
+    },
+    createAppointmentSuccessAction: (state, { payload }) => {
+      state.appointments = [payload, ...state.appointments];
       state.loading = false;
     },
-    getDoctorsFailAction: (state) => {
+    createAppointmentFailAction: (state) => {
       state.loading = false;
     },
-    createDoctorSuccessAction: (state, { payload }) => {
-      state.doctors = [payload, ...state.doctors];
-      state.loading = false;
-    },
-    createDoctorFailAction: (state) => {
-      state.loading = false;
-    },
-    doctorEditSuccessAction: (state, { payload }) => {
-      state.doctor = payload;
+    appointmentEditSuccessAction: (state, { payload }) => {
+      state.appointment = payload;
       state.edit = true;
     },
-    getSpecialitySuccessAction: (state, { payload }) => {
-      state.specialities = payload;
-      state.loadingSpeciality = false;
-      state.loading = false;
-    },
-    getSpecialityFailAction: (state) => {
-      state.loadingSpeciality = false;
-      state.loading = false;
-    },
-    updateDoctorSuccessAction: (state) => {
+    updateAppointmentSuccessAction: (state) => {
       state.edit = false;
+      state.loading = false;
     },
 
     getSearchedDataSuccessAction: (state, { payload }) => {
-      state.doctors = payload;
+      state.appointments = payload;
     },
-    updateDoctorFailAction: (state) => {
+    updateAppointmentFailAction: (state) => {
       state.edit = false;
     },
-    clearDoctorDataAction: (state) => {
+    clearAppointmentDataAction: (state) => {
       state.edit = false;
+      state.loading = false;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
-  loadingDoctorAction,
-  getDoctorSuccessAction,
-  getDoctorsFailAction,
-  createDoctorSuccessAction,
-  createDoctorFailAction,
-  doctorEditSuccessAction,
-  getSpecialitySuccessAction,
-  getSpecialityFailAction,
-  updateDoctorSuccessAction,
-  updateDoctorFailAction,
+  loadingAppointmentAction,
+  loadingCreateAppointmentAction,
+  getAppointmentSuccessAction,
+  getAppointmentFailAction,
+  createAppointmentSuccessAction,
+  createAppointmentFailAction,
+  appointmentEditSuccessAction,
+  updateAppointmentSuccessAction,
+  updateAppointmentFailAction,
   getSearchedDataSuccessAction,
-  clearDoctorDataAction,
-} = doctorSlice.actions;
+  clearAppointmentDataAction,
+} = AppointmentSlice.actions;
 // export reducer
-export default doctorSlice.reducer;
+export default AppointmentSlice.reducer;

@@ -1,32 +1,25 @@
-import { Chip } from "@mui/material";
 import React, { useContext } from "react";
 import AppTable from "../../Components/Table/AppTable";
-import { doctorsSelector } from "../../Redux/Doctor/selector";
+import { appointmentSelector } from "../../Redux/Appointment/selector";
 import { useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
-import { doctorColumn, doctorProps, specialityProps } from "./types";
+import { appointmentColumn, appointmentProps } from "./types";
 
 const Appointment = () => {
   const { loading } = useContext(AppContext);
-  const { doctors } = useAppSelector(doctorsSelector);
+  const { appointments } = useAppSelector(appointmentSelector);
   // table rows
-  const columns: doctorColumn[] = [
+  const columns: appointmentColumn[] = [
     { id: "name", label: "Name" },
-    { id: "visiting_hours", label: "Visting Hours" },
-    { id: "phone_no", label: "Phone No" },
-    { id: "speciality", label: "Speciality" },
+    { id: "patientDisplay", label: "Patient" },
+    { id: "doctorDisplay", label: "Doctor" },
+    { id: "slot", label: "Slot" },
+    { id: "isComplete", label: "Is Complete" },
   ];
-  //display speciality in chip
-  const rowsValue = doctors.map((row: doctorProps) => ({
-    ...row,
-    speciality: row?.speciality?.map((speciality: specialityProps) => {
-      return <Chip label={speciality?.name} key={speciality?.id} />;
-    }),
-  }));
   // const rowsValue=
   return (
     <>
-      <AppTable columns={columns} rowsValue={rowsValue} />
+      <AppTable columns={columns} rowsValue={appointments} />
     </>
   );
 };

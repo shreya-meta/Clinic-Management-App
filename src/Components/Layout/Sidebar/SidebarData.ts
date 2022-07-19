@@ -13,8 +13,8 @@ export const clinicSidebarData = [
         link: "/doctor",
       },
       {
-        name: "Appointments ",
-        link: "/appointments",
+        name: "Appointment ",
+        link: "/appointment",
       },
       // {
       //   name: "Follow Up",

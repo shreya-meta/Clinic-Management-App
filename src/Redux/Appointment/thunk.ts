@@ -1,78 +1,49 @@
-import { Dispatch } from "react";
-import { doctorProps } from "../../Pages/Doctor/types";
+import { appointmentProps } from "../../Pages/Appointment/types";
 import { AppDispatch } from "../../Store";
 import { alertErrorAction, alertSuccessAction } from "../Alert/AlertSlice";
 import * as API from "./api";
 import * as action from "./AppointmentSlice";
 // Asynchronous thunk actions
-// get doctors
-export const getDoctors = () => async (dispatch: AppDispatch) => {
+// get appointments
+export const getAppointments = () => async (dispatch: AppDispatch) => {
   try {
     //dispatch loading action
-    dispatch(action.loadingDoctorAction());
+    dispatch(action.loadingAppointmentAction());
     //fetch api
-    const { data } = await API.getDoctor();
+    const { data } = await API.getAppointment();
     // dispatch success action
-    dispatch(action.getDoctorSuccessAction(data));
+    dispatch(action.getAppointmentSuccessAction(data));
   } catch (error) {
     // dispatch fail action
-    dispatch(action.getDoctorsFailAction());
+    dispatch(action.getAppointmentFailAction());
   }
 };
 // create doctors
-export const createDoctor =
-  (values: doctorProps) => async (dispatch: AppDispatch) => {
+export const createAppointment =
+  (values: appointmentProps) => async (dispatch: AppDispatch) => {
     try {
       const body = values;
-      // body.append("name", name);
-      // body.append("visiting_hours", visiting_hours);
-      // body.append("email", email);
-      // body.append("phone_no", phone_no);
-      // body.append("speciality", String(speciality));
-      // body.append("password", password);
-      // body.append("confirmPassword", confirmPassword);
-      // if (picture) {
-      //   const blob = new Blob([picture], {
-      //     type: "text/plain",
-      //   });
-      //   const url = URL.createObjectURL(blob);
-      //   body.append("picture", url);
-      // }
-      dispatch(action.loadingDoctorAction());
-      const { data } = await API.createDoctor(body);
-      dispatch(action.createDoctorSuccessAction(data));
-      dispatch(alertSuccessAction("Doctor Created Successfully"));
+      dispatch(action.loadingCreateAppointmentAction());
+      const { data } = await API.createAppointment(body);
+      dispatch(action.createAppointmentSuccessAction(data));
+      dispatch(alertSuccessAction("Appointment Created Successfully"));
     } catch (error) {
-      dispatch(action.createDoctorFailAction());
-      dispatch(alertErrorAction("Failed To Create Doctor"));
+      dispatch(action.createAppointmentFailAction());
+      dispatch(alertErrorAction("Failed To Create Appointment"));
     }
   };
 // update doctors
-export const updateDoctor =
-  (values: doctorProps, id: number) => async (dispatch: AppDispatch) => {
+export const updateAppointment =
+  (values: appointmentProps, id: number) => async (dispatch: AppDispatch) => {
     try {
       const body = values;
-      dispatch(action.loadingDoctorAction());
-      await API.updateDoctor(body, id);
-      dispatch(alertSuccessAction("Doctor Updated Successfully"));
-      dispatch(getDoctors());
-      dispatch(action.updateDoctorSuccessAction());
+      dispatch(action.loadingCreateAppointmentAction());
+      await API.updateAppointment(body, id);
+      dispatch(alertSuccessAction("Appointment Updated Successfully"));
+      dispatch(getAppointments());
+      dispatch(action.updateAppointmentSuccessAction());
     } catch (error) {
-      dispatch(action.updateDoctorFailAction());
-      dispatch(alertErrorAction("Failed To Update Doctor"));
+      dispatch(action.updateAppointmentFailAction());
+      dispatch(alertErrorAction("Failed To Update Appointment"));
     }
   };
-// get specialities
-export const getSpecialities = () => async (dispatch: Dispatch<any>) => {
-  try {
-    //dispatch loading action
-    dispatch(action.loadingDoctorAction());
-    //fetch api
-    const { data } = await API.getSpecialities();
-    // dispatch success action
-    dispatch(action.getSpecialitySuccessAction(data));
-  } catch (error) {
-    // dispatch fail action
-    dispatch(action.getSpecialityFailAction());
-  }
-};
