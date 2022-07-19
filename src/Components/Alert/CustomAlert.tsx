@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
@@ -21,13 +21,15 @@ const CustomAlert = ({ openAlert, data }: openAlert) => {
   const { error, info } = useAppSelector(alertSelector);
   const [open, setOpen] = React.useState(false);
   const dispatch = useAppDispatch();
+  // open alert function
   const openAlertFunction = () => {
     setOpen(openAlert);
   };
+  // run effect when component mounts
   useEffect(() => {
     openAlertFunction();
   }, []);
-
+  // close alert
   const handleClose = () => {
     setOpen(false);
     dispatch(closeAlertAction());
@@ -69,4 +71,4 @@ const CustomAlert = ({ openAlert, data }: openAlert) => {
     </>
   );
 };
-export default CustomAlert;
+export default memo(CustomAlert);

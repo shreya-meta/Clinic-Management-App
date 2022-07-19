@@ -14,15 +14,15 @@ import { useGlobalStyles } from "../GlobalStyles/GlobalStyles";
 import SidebarMenu from "./Sidebar/SidebarMenu";
 import { loginSelector } from "../../Redux/Login/selector";
 import { useAppSelector } from "../../Utils/appHooks";
+import { layoutProps } from "./types";
 const Layout = ({
   handleClickOpen,
   children,
   setSearch,
   title,
   types,
-}: any) => {
+}: layoutProps) => {
   const { userRole } = useAppSelector(loginSelector);
-
   const [open, setOpen] = useState(false);
   const providerValue = { open, setOpen };
   const classes = useStyles();

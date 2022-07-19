@@ -3,7 +3,7 @@ import { styled, Theme, CSSObject, alpha } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
-import { AppBarProps } from "./Sidebar/types";
+import { AppBarProps } from "./types";
 const drawerWidth = 230;
 // styles for layout
 export const useStyles = makeStyles(() => ({

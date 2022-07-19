@@ -30,7 +30,8 @@ import { AppContext } from "../../../Utils/AppUtils";
 import { useAppDispatch } from "../../../Utils/appHooks";
 import { logoutSuccessAction } from "../../../Redux/Login/LoginSlice";
 import { alertSuccessAction } from "../../../Redux/Alert/AlertSlice";
-const Header = ({ search, setSearch }: any) => {
+import { headerProps } from "./types";
+const Header = ({ setSearch }: headerProps) => {
   const dispatch = useAppDispatch();
   const { open, setOpen } = useContext(AppContext);
   const handleDrawer = () => {
