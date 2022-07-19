@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useGlobalStyles } from "../../Components/GlobalStyles/GlobalStyles";
 import AppTable from "../../Components/Table/AppTable";
 import { filterAppointmentsByDateAction } from "../../Redux/Appointment/AppointmentSlice";
@@ -7,7 +7,6 @@ import { appointmentSelector } from "../../Redux/Appointment/selector";
 import { getAppointments } from "../../Redux/Appointment/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { appointmentColumn, appointmentProps } from "./types";
-
 const Appointment = () => {
   const { appointments } = useAppSelector(appointmentSelector);
   const [nextAppointment, setNextAppointment] = useState(false);
@@ -15,13 +14,13 @@ const Appointment = () => {
   const dispatch = useAppDispatch();
   // get today date
   // get filtered data greater than or equals to todays date
-  function isDateInFuture(date: number) {
+  function filteredData(date: number) {
     return date >= Date.now();
   }
   const filterDataByDates = () => {
     return appointments.filter((appointment: appointmentProps) => {
       let appointmentDate = new Date(appointment?.slot.substring(0, 10));
-      return isDateInFuture(+appointmentDate);
+      return filteredData(+appointmentDate);
     });
   };
   // effect runs if nextAppointment changes
