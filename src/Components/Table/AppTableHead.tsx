@@ -7,7 +7,7 @@ import { MouseEvent, useContext } from "react";
 import { AppContext } from "../../Utils/AppUtils";
 import { AppTableContext } from "./AppTable";
 const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
-  const { columns, orderBy, order } = useContext(AppTableContext);
+  const { columns, orderBy, order, types } = useContext(AppTableContext);
   console.log(columns, "test columns");
   const createSortHandler = (property: any) => (event: MouseEvent<unknown>) => {
     onRequestSort(event, property);
@@ -40,7 +40,7 @@ const AppTableHead = ({ onRequestSort }: TableHeadProps) => {
               </TableSortLabel>
             </TableCell>
           ))}
-          <TableCell>Actions</TableCell>
+          {types !== "appointment" && <TableCell>Actions</TableCell>}
         </TableRow>
       </TableHead>
     </>

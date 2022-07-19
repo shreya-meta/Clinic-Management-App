@@ -19,6 +19,7 @@ const AppTable = ({ columns, rowsValue }: TableProps) => {
     setPage,
     rowsPerPage,
     setRowsPerPage,
+    types,
   } = useContext(AppContext);
   // const [order, setOrder] = useState<Order>("asc");
   // const [orderBy, setOrderBy] = useState<keyof TableData>("calories");
@@ -31,6 +32,7 @@ const AppTable = ({ columns, rowsValue }: TableProps) => {
   //provided value to the child component
   const providerValue = {
     columns,
+    types,
     rowsValue,
     // orderBy,
     // order,

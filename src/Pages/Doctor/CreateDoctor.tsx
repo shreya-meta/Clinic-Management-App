@@ -135,7 +135,6 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
                   <Grid item xs={6}>
                     <TextField
                       name="visiting_hours"
-                      autoFocus
                       value={values.visiting_hours}
                       id="visiting_hours"
                       label="Visiting Hours"

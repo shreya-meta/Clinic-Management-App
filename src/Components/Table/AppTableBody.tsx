@@ -60,16 +60,19 @@ const AppTableBody = () => {
                 let value = row[id];
                 return <TableCell key={id}>{value ? value : "-"}</TableCell>;
               })}
-              <TableCell>
-                <Button
-                  className={classess.mainButton}
-                  onClick={() => {
-                    handleEdit(row, types, dispatch, setShowModal);
-                  }}
-                >
-                  <EditIcon sx={{ color: "white" }} />
-                </Button>
-              </TableCell>
+
+              {types !== "appointment" && (
+                <TableCell>
+                  <Button
+                    className={classess.mainButton}
+                    onClick={() => {
+                      handleEdit(row, types, dispatch, setShowModal);
+                    }}
+                  >
+                    <EditIcon sx={{ color: "white" }} />
+                  </Button>
+                </TableCell>
+              )}
             </TableRow>
           );
         })}

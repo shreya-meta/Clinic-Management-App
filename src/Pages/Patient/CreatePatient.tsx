@@ -102,7 +102,6 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                     <TextField
                       className={classes.textWidth}
                       name="age"
-                      autoFocus
                       value={values.age}
                       id="Age"
                       label="age"
@@ -118,7 +117,6 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                     <TextField
                       className={classes.textWidth}
                       name="sex"
-                      autoFocus
                       value={values.sex}
                       id="Sex"
                       label="sex"
@@ -134,7 +132,6 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
                     <TextField
                       className={classes.textWidth}
                       name="location"
-                      autoFocus
                       value={values.location}
                       id="location"
                       label="Location"

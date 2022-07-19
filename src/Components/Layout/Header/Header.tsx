@@ -29,6 +29,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { AppContext } from "../../../Utils/AppUtils";
 import { useAppDispatch } from "../../../Utils/appHooks";
 import { logoutSuccessAction } from "../../../Redux/Login/LoginSlice";
+import { alertSuccessAction } from "../../../Redux/Alert/AlertSlice";
 const Header = ({ search, setSearch }: any) => {
   const dispatch = useAppDispatch();
   const { open, setOpen } = useContext(AppContext);
@@ -50,6 +51,7 @@ const Header = ({ search, setSearch }: any) => {
   //handle logout
   const handleLogout = () => {
     dispatch(logoutSuccessAction());
+    dispatch(alertSuccessAction("Logout successfully."));
   };
   return (
     <AppBar position="fixed" open={open}>

@@ -34,7 +34,11 @@ const Layout = ({
         </Grid>
         <Grid className={classes.content}>
           <Card className={classes.layoutCard}>
-            <Typography variant="h6">{title}</Typography>
+            <Grid container justifyContent="flex-start">
+              <Typography variant="h1" sx={{ fontWeight: "bold" }}>
+                {title}
+              </Typography>
+            </Grid>
             {types !== "profile" && (
               <Grid container justifyContent="flex-end">
                 <Button

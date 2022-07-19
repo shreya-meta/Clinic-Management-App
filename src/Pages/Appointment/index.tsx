@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Layout from "../../Components/Layout";
 import {
-  clearDoctorDataAction,
+  clearAppointmentDataAction,
   getSearchedDataSuccessAction,
-} from "../../Redux/Doctor/DoctorSlice";
+} from "../../Redux/Appointment/AppointmentSlice";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { AppContext } from "../../Utils/AppUtils";
 import CreateAppointment from "./CreateAppointment";
@@ -20,7 +20,7 @@ const AppointmentListing = () => {
   //Handle Open Modal
   const handleClickOpen = () => {
     setShowModal(true);
-    dispatch(clearDoctorDataAction());
+    dispatch(clearAppointmentDataAction());
   };
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
