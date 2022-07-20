@@ -1,6 +1,4 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import Layout from "../../Components/Layout";
 import {
   clearAppointmentDataAction,
@@ -26,7 +24,8 @@ const AppointmentListing = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // initialize the redux hook
   const dispatch = useAppDispatch();
-  const { appointments, loading, edit } = useAppSelector(appointmentSelector);
+  const { appointments, loadingAppointment, edit } =
+    useAppSelector(appointmentSelector);
   //state for searching
   const [search, setSearch] = useState("");
   const types = "appointment";
@@ -40,7 +39,7 @@ const AppointmentListing = () => {
   };
   const providerValue = {
     setShowModal,
-    loading,
+    loading: loadingAppointment,
     page,
     setPage,
     rowsPerPage,
@@ -52,7 +51,7 @@ const AppointmentListing = () => {
     if (search === "") {
       dispatch(getAppointments());
     } else {
-      // filter with searched values
+      // filter data that matches searched values with name
       let searchedValue = appointments.filter((row: appointmentProps) => {
         const { slot } = row;
         return slot.toLowerCase().includes(search.toLowerCase());

@@ -17,6 +17,7 @@ export const getDoctors = () => async (dispatch: AppDispatch) => {
   } catch (error) {
     // dispatch fail action
     dispatch(action.getDoctorsFailAction());
+    dispatch(alertErrorAction("Failed To Get Data"));
   }
 };
 // create doctors
@@ -38,7 +39,7 @@ export const createDoctor =
       //   const url = URL.createObjectURL(blob);
       //   body.append("picture", url);
       // }
-      dispatch(action.loadingDoctorAction());
+      dispatch(action.loadingCreateDoctorAction());
       const { data } = await API.createDoctor(body);
       dispatch(action.createDoctorSuccessAction(data));
       dispatch(alertSuccessAction("Doctor Created Successfully"));
@@ -52,7 +53,7 @@ export const updateDoctor =
   (values: doctorProps, id: number) => async (dispatch: AppDispatch) => {
     try {
       const body = values;
-      dispatch(action.loadingDoctorAction());
+      dispatch(action.loadingCreateDoctorAction());
       await API.updateDoctor(body, id);
       dispatch(alertSuccessAction("Doctor Updated Successfully"));
       dispatch(getDoctors());

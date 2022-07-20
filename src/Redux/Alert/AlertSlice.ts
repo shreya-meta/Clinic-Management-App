@@ -9,6 +9,7 @@ const initialState: initialAlertTypes = {
   success: false,
   message: "",
 };
+// create alert slice
 const alertSlice = createSlice({
   name: "alert",
   initialState,
@@ -20,12 +21,12 @@ const alertSlice = createSlice({
     },
     alertErrorAction: (state, { payload }) => {
       state.open = true;
-      state.success = true;
+      state.error = true;
       state.message = payload;
     },
     alertInfoAction: (state, { payload }) => {
       state.open = true;
-      state.success = true;
+      state.info = true;
       state.message = payload;
     },
     closeAlertAction: (state) => {

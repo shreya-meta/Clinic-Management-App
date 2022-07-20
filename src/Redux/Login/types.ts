@@ -1,10 +1,12 @@
 import { doctorProps } from "../../Pages/Doctor/types";
-
-export interface adminData {
-  email: string;
-  password: string;
-}
+// types for
 export interface loginProps {
   role: string;
   loggedUser?: doctorProps;
+}
+export interface DoctorInitialTypes {
+  loadingLogin: boolean;
+  loggedUser: doctorProps | null;
+  isAuthenticated: boolean;
+  userRole: string;
 }

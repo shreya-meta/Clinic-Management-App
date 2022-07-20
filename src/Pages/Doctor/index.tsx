@@ -28,7 +28,7 @@ const DoctorListing = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // initialize the redux hook
   const dispatch = useAppDispatch();
-  const { doctors, loading, edit } = useAppSelector(doctorsSelector);
+  const { doctors, loadingDoctor, edit } = useAppSelector(doctorsSelector);
   // const { doctors, loading } = useSelector(doctorsSelector);
   // console.log(doctors, "doctors");
   //state for searching
@@ -51,7 +51,7 @@ const DoctorListing = () => {
   }, [dispatch]);
   const providerValue = {
     setShowModal,
-    loading,
+    loading: loadingDoctor,
     page,
     setPage,
     rowsPerPage,

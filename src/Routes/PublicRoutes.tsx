@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
-const Login = lazy(() => import("../Pages/login"));
+const Login = lazy(() => import("../Pages/Login/login"));
 const PublicRoutes = () => {
   return (
     <>

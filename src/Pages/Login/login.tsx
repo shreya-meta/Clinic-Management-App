@@ -4,11 +4,10 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import { red } from "@mui/material/colors";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
-  Button,
   FormControl,
   Grid,
   Input,
@@ -17,33 +16,18 @@ import {
 } from "@mui/material";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
-import AppButton from "../Components/Button/AppButton";
-import TextError from "../Components/TextError/TextError";
-import { getAdminData, login } from "../Redux/Login/thunk";
-import { getDoctors } from "../Redux/Doctor/thunk";
-import { useAppDispatch, useAppSelector } from "../Utils/appHooks";
-import { loginSelector } from "../Redux/Login/selector";
-import { doctorsSelector } from "../Redux/Doctor/selector";
-import { doctorProps } from "./Doctor/types";
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
+import AppButton from "../../Components/Button/AppButton";
+import TextError from "../../Components/TextError/TextError";
+import { login } from "../../Redux/Login/thunk";
+import { getDoctors } from "../../Redux/Doctor/thunk";
+import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
+import { loginSelector } from "../../Redux/Login/selector";
+import { doctorsSelector } from "../../Redux/Doctor/selector";
+import { doctorProps } from "../Doctor/types";
+import { loginProps } from "./types";
+import { alertErrorAction } from "../../Redux/Alert/AlertSlice";
 const Login = () => {
   const { doctors } = useAppSelector(doctorsSelector);
-  const [expanded, setExpanded] = useState(false);
   const { loadingLogin } = useAppSelector(loginSelector);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
@@ -52,7 +36,7 @@ const Login = () => {
     setShowPassword((prev: boolean) => !prev);
   };
   // initial values for the login form
-  const initialValues: any = {
+  const initialValues: loginProps = {
     email: "",
     password: "",
   };
@@ -67,7 +51,7 @@ const Login = () => {
     dispatch(getDoctors());
   }, []);
   // submit handler
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: loginProps) => {
     const { email, password } = values;
     // get data only if email doesn't match with admin email
     let authenticatedDoctor = doctors.some(
@@ -86,13 +70,10 @@ const Login = () => {
             ),
           }
         : "n/a";
-    dispatch(login(user_role));
-    console.log(
-      doctors?.find((doctor: doctorProps) => doctor?.email === email),
-      "tets logged user"
-    );
-    // const data = { userName, password, branch: branch?.id };
-    // dispatch(login(data));
+    // allow login only to authenticate user and admin
+    user_role === "n/a"
+      ? dispatch(alertErrorAction("Invalid credentials"))
+      : dispatch(login(user_role));
   };
   return (
     <Card sx={{ margin: "80px auto", maxWidth: 345 }}>
@@ -103,8 +84,6 @@ const Login = () => {
             aria-label="login"
           ></Avatar>
         }
-        // title="Shrimp and Chorizo Paella"
-        // subheader="September 14, 2016"
       />
 
       <CardContent>

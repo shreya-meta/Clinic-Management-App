@@ -1,36 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { doctorProps, specialityProps } from "../../Pages/Doctor/types";
+import { DoctorState } from "./types";
 
-export interface DoctorState {
-  loading: boolean;
-  edit: boolean;
-  doctors: doctorProps[];
-  doctor: doctorProps | null;
-  specialities: specialityProps[];
-  loadingSpeciality: boolean;
-}
 //initialize state
 const initialState: DoctorState = {
   loading: false,
+  loadingDoctor: false,
   edit: false,
   doctors: [],
   doctor: null,
   specialities: [],
   loadingSpeciality: false,
 };
+// create doctor slice
 const doctorSlice = createSlice({
   name: "doctor",
   initialState,
   reducers: {
     loadingDoctorAction: (state) => {
+      state.loadingDoctor = true;
+    },
+    loadingCreateDoctorAction: (state) => {
       state.loading = true;
     },
     getDoctorSuccessAction: (state, { payload }) => {
       state.doctors = payload;
-      state.loading = false;
+      state.loadingDoctor = false;
     },
     getDoctorsFailAction: (state) => {
-      state.loading = false;
+      state.loadingDoctor = false;
     },
     createDoctorSuccessAction: (state, { payload }) => {
       state.doctors = [payload, ...state.doctors];
@@ -54,14 +51,16 @@ const doctorSlice = createSlice({
     },
     updateDoctorSuccessAction: (state) => {
       state.edit = false;
-    },
-
-    getSearchedDataSuccessAction: (state, { payload }) => {
-      state.doctors = payload;
+      state.loading = false;
     },
     updateDoctorFailAction: (state) => {
       state.edit = false;
+      state.loading = false;
     },
+    getSearchedDataSuccessAction: (state, { payload }) => {
+      state.doctors = payload;
+    },
+
     clearDoctorDataAction: (state) => {
       state.edit = false;
     },
@@ -82,6 +81,7 @@ export const {
   updateDoctorFailAction,
   getSearchedDataSuccessAction,
   clearDoctorDataAction,
+  loadingCreateDoctorAction,
 } = doctorSlice.actions;
 // export reducer
 export default doctorSlice.reducer;

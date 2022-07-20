@@ -16,6 +16,7 @@ export const getAppointments = () => async (dispatch: AppDispatch) => {
   } catch (error) {
     // dispatch fail action
     dispatch(action.getAppointmentFailAction());
+    dispatch(alertErrorAction("Failed To Get Data"));
   }
 };
 // create doctors

@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { doctorProps } from "../../Pages/Doctor/types";
+import { DoctorInitialTypes } from "./types";
 
-export interface DoctorInitialTypes {
-  loadingLogin: boolean;
-  loggedUser: doctorProps | null;
-  isAuthenticated: boolean;
-  userRole: string;
-}
 //initialize state
 const initialState: DoctorInitialTypes = {
   loadingLogin: false,
@@ -14,6 +8,7 @@ const initialState: DoctorInitialTypes = {
   loggedUser: null,
   userRole: "",
 };
+//create login slice
 const LoginSlice = createSlice({
   name: "login",
   initialState,
@@ -33,12 +28,6 @@ const LoginSlice = createSlice({
     logoutSuccessAction: (state) => {
       state.isAuthenticated = false;
     },
-    getAdminDataSuccessAction: (state, { payload }) => {
-      state.loadingLogin = false;
-    },
-    getAdminDataFailAction: (state) => {
-      state.loadingLogin = false;
-    },
   },
 });
 
@@ -47,8 +36,6 @@ export const {
   loadingLoginAction,
   loginSuccessAction,
   loginFailAction,
-  getAdminDataSuccessAction,
-  getAdminDataFailAction,
   logoutSuccessAction,
 } = LoginSlice.actions;
 // export reducer

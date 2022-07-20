@@ -17,6 +17,7 @@ const initialState: AppointmentState = {
   appointment: null,
   loadingAppointment: false,
 };
+// create appointment slice
 const AppointmentSlice = createSlice({
   name: "appointment",
   initialState,
@@ -55,6 +56,7 @@ const AppointmentSlice = createSlice({
     },
     updateAppointmentFailAction: (state) => {
       state.edit = false;
+      state.loading = false;
     },
     clearAppointmentDataAction: (state) => {
       state.edit = false;

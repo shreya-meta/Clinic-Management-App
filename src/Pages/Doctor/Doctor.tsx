@@ -7,7 +7,7 @@ import { AppContext } from "../../Utils/AppUtils";
 import { doctorColumn, doctorProps, specialityProps } from "./types";
 
 const Doctor = () => {
-  const { loading } = useContext(AppContext);
+  // const { loading } = useContext(AppContext);
   const { doctors } = useAppSelector(doctorsSelector);
   // table rows
   const columns: doctorColumn[] = [
@@ -24,6 +24,7 @@ const Doctor = () => {
       return <Chip label={speciality?.name} key={speciality?.id} />;
     }),
   }));
+
   // const rowsValue=
   return (
     <>

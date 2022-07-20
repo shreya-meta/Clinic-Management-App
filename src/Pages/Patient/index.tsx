@@ -26,11 +26,8 @@ const PatientListing = () => {
   const dispatch = useAppDispatch();
   const { patients, loadingPatient, edit, appointmentModal } =
     useAppSelector(patientSelector);
-  // const { doctors, loading } = useSelector(doctorsSelector);
-  // console.log(doctors, "doctors");
   //state for searching
   const [search, setSearch] = useState("");
-  console.log(search, "test search");
   const types = "patient";
   const title = "Patient";
   const ModalValue = {
@@ -51,7 +48,7 @@ const PatientListing = () => {
 
   const providerValue = {
     setShowModal,
-    loadingPatient,
+    loading: loadingPatient,
     page,
     setPage,
     rowsPerPage,
@@ -69,7 +66,6 @@ const PatientListing = () => {
       });
       dispatch(getSearchedDataSuccessAction(searchedValue));
     }
-    // : dispatch(searchDoctors());
   }, [search, dispatch]);
   return (
     <>

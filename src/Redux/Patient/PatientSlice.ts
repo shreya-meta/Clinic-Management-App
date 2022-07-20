@@ -50,12 +50,12 @@ const patientSlice = createSlice({
       state.edit = false;
       state.loading = false;
     },
-
-    getSearchedDataSuccessAction: (state, { payload }) => {
-      state.patients = payload;
-    },
     updatePatientFailAction: (state) => {
       state.edit = false;
+      state.loading = false;
+    },
+    getSearchedDataSuccessAction: (state, { payload }) => {
+      state.patients = payload;
     },
     clearPatientDataAction: (state) => {
       state.edit = false;

@@ -6,7 +6,6 @@ import { AppContext } from "../../Utils/AppUtils";
 import { patientColumn } from "./types";
 
 const Patient = () => {
-  const { loading } = useContext(AppContext);
   const { patients } = useAppSelector(patientSelector);
   // table rows
   const columns: patientColumn[] = [
