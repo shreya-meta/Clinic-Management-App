@@ -38,9 +38,11 @@ const patientSlice = createSlice({
     createPatientSuccessAction: (state, { payload }) => {
       state.patients = [payload, ...state.patients];
       state.loading = false;
+      state.loadingPatient = false;
     },
     createPatientFailAction: (state) => {
       state.loading = false;
+      state.loadingPatient = false;
     },
     patientEditSuccessAction: (state, { payload }) => {
       state.patient = payload;
@@ -49,10 +51,12 @@ const patientSlice = createSlice({
     updatePatientSuccessAction: (state) => {
       state.edit = false;
       state.loading = false;
+      state.loadingPatient = false;
     },
     updatePatientFailAction: (state) => {
       state.edit = false;
       state.loading = false;
+      state.loadingPatient = false;
     },
     getSearchedDataSuccessAction: (state, { payload }) => {
       state.patients = payload;

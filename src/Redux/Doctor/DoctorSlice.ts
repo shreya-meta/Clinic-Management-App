@@ -25,16 +25,20 @@ const doctorSlice = createSlice({
     getDoctorSuccessAction: (state, { payload }) => {
       state.doctors = payload;
       state.loadingDoctor = false;
+      state.loading = false;
     },
     getDoctorsFailAction: (state) => {
       state.loadingDoctor = false;
+      state.loading = false;
     },
     createDoctorSuccessAction: (state, { payload }) => {
       state.doctors = [payload, ...state.doctors];
       state.loading = false;
+      state.loadingDoctor = false;
     },
     createDoctorFailAction: (state) => {
       state.loading = false;
+      state.loadingDoctor = false;
     },
     doctorEditSuccessAction: (state, { payload }) => {
       state.doctor = payload;
@@ -44,10 +48,12 @@ const doctorSlice = createSlice({
       state.specialities = payload;
       state.loadingSpeciality = false;
       state.loading = false;
+      state.loadingDoctor = false;
     },
     getSpecialityFailAction: (state) => {
       state.loadingSpeciality = false;
       state.loading = false;
+      state.loadingDoctor = false;
     },
     updateDoctorSuccessAction: (state) => {
       state.edit = false;
@@ -56,6 +62,7 @@ const doctorSlice = createSlice({
     updateDoctorFailAction: (state) => {
       state.edit = false;
       state.loading = false;
+      state.loadingDoctor = false;
     },
     getSearchedDataSuccessAction: (state, { payload }) => {
       state.doctors = payload;
@@ -63,6 +70,7 @@ const doctorSlice = createSlice({
 
     clearDoctorDataAction: (state) => {
       state.edit = false;
+      state.loadingDoctor = false;
     },
   },
 });

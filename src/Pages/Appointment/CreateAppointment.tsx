@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { ChangeEvent, memo } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 import { Autocomplete, Grid, TextareaAutosize, TextField } from "@mui/material";
@@ -20,8 +20,10 @@ import { doctorsSelector } from "../../Redux/Doctor/selector";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { patientProps } from "../Patient/types";
 import { loginSelector } from "../../Redux/Login/selector";
+import { alertInfoAction } from "../../Redux/Alert/AlertSlice";
 const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
-  const { edit, appointment, loading } = useAppSelector(appointmentSelector);
+  const { edit, appointment, loading, appointments } =
+    useAppSelector(appointmentSelector);
   const { doctors } = useAppSelector(doctorsSelector);
   const { patients } = useAppSelector(patientSelector);
   const { userRole, loggedUser } = useAppSelector(loginSelector);
@@ -48,6 +50,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
       .required("Required")
       .min(4, "name must have at least 4 characters "),
     isComplete: Yup.bool(),
+    slot: Yup.string().required("Required"),
     patient: Yup.object().required("Required").nullable(),
     doctor: Yup.object().required("Required").nullable(),
     feedback: Yup.string(),
@@ -85,6 +88,27 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
   //load patient options
   const loadPatientOptions = () =>
     patients?.length === 0 && dispatch(getPatients());
+  // handle slot
+  const handleSlot = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    setFieldValue: (
+      field: string,
+      value: any,
+      shouldValidate?: boolean | undefined
+    ) => void,
+    values: appointmentProps
+  ) => {
+    // check if slot is available or not
+    appointments?.some(
+      (appointment: appointmentProps) =>
+        appointment?.doctor?.id === values?.doctor?.id &&
+        appointment?.slot === e.target.value
+    )
+      ? dispatch(
+          alertInfoAction("Same slot is not available for the selected doctor")
+        )
+      : setFieldValue("slot", e.target.value);
+  };
   return (
     <>
       {/* <LocalizationProvider dateAdapter={AdapterDateFns}> */}
@@ -200,10 +224,10 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
                           required
                           variant="outlined"
                           onChange={(e) => {
-                            setFieldValue("slot", e.target.value);
+                            handleSlot(e, setFieldValue, values);
                           }}
                         />
-                        <ErrorMessage name="name" component={TextError} />
+                        <ErrorMessage name="slot" component={TextError} />
                       </Grid>
                     </>
                   )}
