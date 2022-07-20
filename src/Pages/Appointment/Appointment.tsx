@@ -14,7 +14,6 @@ const Appointment = () => {
   const { loggedUser } = useAppSelector(loginSelector);
   const globalClassess = useGlobalStyles();
   const dispatch = useAppDispatch();
-  // get today date
   // get filtered data greater than or equals to todays date
   function filteredData(date: number) {
     return date >= Date.now();
@@ -38,7 +37,7 @@ const Appointment = () => {
     ...appointment,
     isCompleteDisplay: appointment?.isComplete ? "Yes" : "No",
   }));
-  // table rows
+  // table columns
   const columns: appointmentColumn[] = [
     { id: "name", label: "Name" },
     { id: "patientDisplay", label: "Patient" },
