@@ -24,6 +24,7 @@ const Modal = ({ modalValue, children, maxWidth }: ModalProps) => {
         open={showModal}
         maxWidth={maxWidth}
       >
+        {/* modal title */}
         <ModalTitle
           id="customized-dialog-title"
           onClose={handleClose}
@@ -35,7 +36,7 @@ const Modal = ({ modalValue, children, maxWidth }: ModalProps) => {
             ? title
             : `Create ${title}`}
         </ModalTitle>
-
+        {/* display children i.e components */}
         <DialogContent dividers>{children} </DialogContent>
       </Dialog>
     </>

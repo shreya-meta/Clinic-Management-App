@@ -1,14 +1,14 @@
 import ListItem from "@mui/material/ListItem";
-import React, { forwardRef } from "react";
+import { forwardRef, memo, MouseEvent, ReactNode, FC } from "react";
 import { NavLink } from "react-router-dom";
 
 export interface AppMenuItemComponentProps {
   className?: string;
   link?: string | null; // because the InferProps props  allows null value
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  children: React.ReactNode;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
+  children: ReactNode;
 }
-const MenuItemList: React.FC<AppMenuItemComponentProps> = (props) => {
+const MenuItemList: FC<AppMenuItemComponentProps> = (props) => {
   const { className, onClick, link, children } = props;
   // If link is not set return the ordinary ListItem
   if (!link || typeof link !== "string") {
@@ -36,4 +36,4 @@ const MenuItemList: React.FC<AppMenuItemComponentProps> = (props) => {
   );
 };
 
-export default MenuItemList;
+export default memo(MenuItemList);

@@ -5,7 +5,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ModalTitleProps } from "./types";
 const ModalTitle = (props: ModalTitleProps) => {
   const { children, onClose, ...other } = props;
-
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}

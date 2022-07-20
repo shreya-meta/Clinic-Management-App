@@ -16,6 +16,7 @@ const SidebarMenu = () => {
   const { userRole } = useAppSelector(loginSelector);
   const [search, setSearch] = useState("");
   const classes = useStyles();
+  // load sidebar data based upon roles
   const dataToBeLoad =
     userRole === "admin" ? clinicSidebarData : clinicDoctorSidebarData;
   return (
