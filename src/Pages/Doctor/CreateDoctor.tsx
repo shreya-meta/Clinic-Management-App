@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, memo } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
@@ -299,4 +299,4 @@ const CreateDoctor = ({ setShowModal }: createDoctorProps) => {
   );
 };
 
-export default React.memo(CreateDoctor);
+export default memo(CreateDoctor);
