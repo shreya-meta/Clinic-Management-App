@@ -29,13 +29,12 @@ const DoctorListing = () => {
   // initialize the redux hook
   const dispatch = useAppDispatch();
   const { doctors, loadingDoctor, edit } = useAppSelector(doctorsSelector);
-  // const { doctors, loading } = useSelector(doctorsSelector);
-  // console.log(doctors, "doctors");
   //state for searching
   const [search, setSearch] = useState("");
-  console.log(search, "test search");
+  // define types and title
   const types = "doctor";
   const title = "Doctor";
+  // modal value
   const ModalValue = {
     edit,
     showModal,
@@ -45,10 +44,7 @@ const DoctorListing = () => {
   };
   // dispatch our thunk when component first mounts
 
-  useEffect(() => {
-    console.log("inside useEffect");
-    dispatch(getDoctors());
-  }, [dispatch]);
+  // provider value
   const providerValue = {
     setShowModal,
     loading: loadingDoctor,
@@ -58,11 +54,13 @@ const DoctorListing = () => {
     setRowsPerPage,
     types,
   };
+  // dispatch thunk when dependency changed
   useEffect(() => {
+    // when search is empty dispatch get method
     if (search === "") {
       dispatch(getDoctors());
     } else {
-      // filter with searched values
+      // filter data that matches searched values with name and speciality
       let searchedValue = doctors.filter((row: doctorProps) => {
         const { name, speciality } = row;
         return (
@@ -76,7 +74,6 @@ const DoctorListing = () => {
       });
       dispatch(getSearchedDataSuccessAction(searchedValue));
     }
-    // : dispatch(searchDoctors());
   }, [search, dispatch]);
   return (
     <>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
-import { DropzoneArea } from "react-mui-dropzone";
 import * as Yup from "yup";
 import {
   Grid,

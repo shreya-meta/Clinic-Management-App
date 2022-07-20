@@ -1,10 +1,5 @@
-import React from "react";
 import { appointmentSelector } from "../../Redux/Appointment/selector";
 import {
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
   Paper,
   Table,
   TableBody,
@@ -12,12 +7,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  Typography,
 } from "@mui/material";
 import { useAppSelector } from "../../Utils/appHooks";
 import { appointmentColumn, appointmentProps } from "../Appointment/types";
-import AppTable from "../../Components/Table/AppTable";
 
 const ViewAppointment = () => {
   const { filteredAppointments } = useAppSelector(appointmentSelector);

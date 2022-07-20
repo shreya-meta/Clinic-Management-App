@@ -28,11 +28,12 @@ const AppointmentListing = () => {
   const { appointments, loadingAppointment, edit } =
     useAppSelector(appointmentSelector);
   const { loggedUser } = useAppSelector(loginSelector);
-
   //state for searching
   const [search, setSearch] = useState("");
+  // define types and title
   const types = "appointment";
   const title = "Appointment";
+  // modal value
   const ModalValue = {
     edit,
     showModal,
@@ -49,11 +50,10 @@ const AppointmentListing = () => {
     setRowsPerPage,
     types,
   };
-  // dispatch our thunk when component first mounts
+  // dispatch thunk when dependency changed
   useEffect(() => {
+    // when search is empty dispatch get method
     if (search === "") {
-      // loggedUser?.id
-      //   ? dispatch(FilterAppointmentByDoctor(loggedUser?.id))
       dispatch(getAppointments(loggedUser?.id && loggedUser?.id));
     } else {
       // filter data that matches searched values with name

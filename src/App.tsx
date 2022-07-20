@@ -13,6 +13,7 @@ const App = () => {
     <>
       {/* open alert  */}
       {open && <CustomAlert openAlert={open} data={message} />}
+      {/* only authenticated user can access routes else will be redirected to login page  */}
       {isAuthenticated ? <PrivateRoutes /> : <PublicRoutes />}
     </>
   );

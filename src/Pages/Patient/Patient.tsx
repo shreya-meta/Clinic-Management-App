@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext, memo } from "react";
 import AppTable from "../../Components/Table/AppTable";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { useAppSelector } from "../../Utils/appHooks";
@@ -22,4 +22,4 @@ const Patient = () => {
   );
 };
 
-export default React.memo(Patient);
+export default memo(Patient);

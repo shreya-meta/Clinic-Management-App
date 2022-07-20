@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense, lazy } from "react";
 import Layout from "../../Components/Layout";
 import { getAppointments } from "../../Redux/Appointment/thunk";
 import { getSearchedDataSuccessAction } from "../../Redux/Patient/PatientSlice";
-import { clearPatientDataAction } from "../../Redux/Patient/PatientSlice";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { getPatients } from "../../Redux/Patient/thunk";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
@@ -28,8 +27,10 @@ const PatientListing = () => {
     useAppSelector(patientSelector);
   //state for searching
   const [search, setSearch] = useState("");
+  // define types and title
   const types = "patient";
   const title = "Patient";
+  // modal value
   const ModalValue = {
     edit,
     showModal,
@@ -37,6 +38,7 @@ const PatientListing = () => {
     setShowModal,
     title,
   };
+  // provider value for appointment view modal
   const AppointmentModalValue = {
     edit: false,
     showModal,
@@ -44,8 +46,7 @@ const PatientListing = () => {
     setShowModal,
     title: " View Appointment History",
   };
-  // dispatch our thunk when component first mounts
-
+  //provider value
   const providerValue = {
     setShowModal,
     loading: loadingPatient,
@@ -55,11 +56,15 @@ const PatientListing = () => {
     setRowsPerPage,
     types,
   };
+  // dispatch  thunk when dependency changed
   useEffect(() => {
+    // dispatch appointments
     dispatch(getAppointments());
+    // when search is empty dispatch get method
     if (search === "") {
       dispatch(getPatients());
     } else {
+      // filter data that matches searched values with name
       let searchedValue = patients.filter((row: patientProps) => {
         const { name } = row;
         return name.toLowerCase().includes(search.toLowerCase());
