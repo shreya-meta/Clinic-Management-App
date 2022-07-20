@@ -1,8 +1,7 @@
-import { useContext, memo } from "react";
+import { memo } from "react";
 import AppTable from "../../Components/Table/AppTable";
 import { patientSelector } from "../../Redux/Patient/selector";
 import { useAppSelector } from "../../Utils/appHooks";
-import { AppContext } from "../../Utils/AppUtils";
 import { patientColumn } from "./types";
 
 const Patient = () => {
