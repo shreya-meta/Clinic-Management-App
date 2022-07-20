@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import ModalTitle from "./ModalTitle";
 import { ModalProps } from "./types";
 import { Dialog, DialogContent } from "@mui/material";
@@ -43,4 +43,4 @@ const Modal = ({ modalValue, children, maxWidth }: ModalProps) => {
   );
 };
 
-export default React.memo(Modal);
+export default memo(Modal);

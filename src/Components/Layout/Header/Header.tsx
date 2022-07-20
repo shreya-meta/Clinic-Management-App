@@ -1,22 +1,11 @@
-import React, { useContext } from "react";
+import { useContext, memo } from "react";
 import { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import {
-  Badge,
-  Box,
-  Grid,
-  IconButton,
-  InputBase,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
-import { ThemeProvider } from "@mui/material/styles";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import {
   AppBar,
@@ -111,4 +100,4 @@ const Header = ({ setSearch }: headerProps) => {
   );
 };
 
-export default React.memo(Header);
+export default memo(Header);

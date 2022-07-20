@@ -55,7 +55,8 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
     doctor: Yup.object().required("Required").nullable(),
     feedback: Yup.string(),
   });
-  const onSubmit = (values: any) => {
+  // function to submit form values
+  const onSubmit = (values: appointmentProps) => {
     const { patient, doctor } = values;
     if (edit) {
       // dispatching update action

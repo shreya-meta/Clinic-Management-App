@@ -1,13 +1,11 @@
 import { Chip } from "@mui/material";
-import React, { useContext } from "react";
+import { memo } from "react";
 import AppTable from "../../Components/Table/AppTable";
 import { doctorsSelector } from "../../Redux/Doctor/selector";
 import { useAppSelector } from "../../Utils/appHooks";
-import { AppContext } from "../../Utils/AppUtils";
 import { doctorColumn, doctorProps, specialityProps } from "./types";
 
 const Doctor = () => {
-  // const { loading } = useContext(AppContext);
   const { doctors } = useAppSelector(doctorsSelector);
   // table rows
   const columns: doctorColumn[] = [
@@ -33,4 +31,4 @@ const Doctor = () => {
   );
 };
 
-export default React.memo(Doctor);
+export default memo(Doctor);

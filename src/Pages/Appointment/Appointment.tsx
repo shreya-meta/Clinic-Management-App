@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useGlobalStyles } from "../../Components/GlobalStyles/GlobalStyles";
 import AppTable from "../../Components/Table/AppTable";
 import { filterAppointmentsByDateAction } from "../../Redux/Appointment/AppointmentSlice";
@@ -59,4 +59,4 @@ const Appointment = () => {
   );
 };
 
-export default React.memo(Appointment);
+export default memo(Appointment);

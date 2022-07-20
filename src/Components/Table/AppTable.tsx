@@ -13,8 +13,6 @@ import ListingTableData from "../Skeleton/listingTableData";
 
 export const AppTableContext = createContext<any>("");
 const AppTable = ({ columns, rowsValue }: TableProps) => {
-  // const { patients, loadingPatient, edit, appointmentModal } =
-  //   useAppSelector(patientSelector);
   const { types, loading } = useContext(AppContext);
   console.log(loading, "test loading");
   //provided value to the child component

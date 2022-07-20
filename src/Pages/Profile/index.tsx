@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, memo } from "react";
 import Layout from "../../Components/Layout";
 import ProfileInfo from "./Profile";
 const Profile = () => {
@@ -16,4 +16,4 @@ const Profile = () => {
   );
 };
 
-export default React.memo(Profile);
+export default memo(Profile);

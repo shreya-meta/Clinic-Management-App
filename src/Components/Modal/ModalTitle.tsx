@@ -1,4 +1,4 @@
-import * as React from "react";
+import { memo } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -25,4 +25,4 @@ const ModalTitle = (props: ModalTitleProps) => {
     </DialogTitle>
   );
 };
-export default React.memo(ModalTitle);
+export default memo(ModalTitle);

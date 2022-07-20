@@ -9,7 +9,7 @@ import {
   patientEditSuccessAction,
 } from "../../Redux/Patient/PatientSlice";
 import { AppDispatch } from "../../Store";
-
+// handle edit
 export const handleEdit = (
   row: any,
   types: string,
@@ -32,7 +32,7 @@ export const handleTableRowClicked = (
   dispatch(appointmentEditSuccessAction(row));
   setShowModal(true);
 };
-// // for view button
+// for view button
 export const handleView = (
   id: number,
   dispatch: AppDispatch,

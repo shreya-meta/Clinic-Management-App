@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import { memo, useState, useEffect, Suspense, lazy } from "react";
 import Layout from "../../Components/Layout";
 import { getAppointments } from "../../Redux/Appointment/thunk";
 import { getSearchedDataSuccessAction } from "../../Redux/Patient/PatientSlice";
@@ -102,4 +102,4 @@ const PatientListing = () => {
   );
 };
 
-export default React.memo(PatientListing);
+export default memo(PatientListing);

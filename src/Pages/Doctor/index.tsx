@@ -1,8 +1,5 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect, Suspense, lazy, memo } from "react";
 import Layout from "../../Components/Layout";
-import AppTable from "../../Components/Table/AppTable";
 import {
   clearDoctorDataAction,
   getSearchedDataSuccessAction,
@@ -99,4 +96,4 @@ const DoctorListing = () => {
   );
 };
 
-export default React.memo(DoctorListing);
+export default memo(DoctorListing);

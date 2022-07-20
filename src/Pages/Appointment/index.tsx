@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense, lazy, memo } from "react";
 import Layout from "../../Components/Layout";
 import {
   clearAppointmentDataAction,
@@ -92,4 +92,4 @@ const AppointmentListing = () => {
   );
 };
 
-export default React.memo(AppointmentListing);
+export default memo(AppointmentListing);

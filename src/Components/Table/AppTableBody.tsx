@@ -11,7 +11,7 @@ const AppTableBody = () => {
   const dispatch = useAppDispatch();
   const { page, rowsPerPage, types, setShowModal } = useContext(AppContext);
   const { columns, rowsValue } = useContext(AppTableContext);
-  const classess = useGlobalStyles();
+  const classes = useGlobalStyles();
   return (
     <>
       {rowsValue
@@ -38,7 +38,7 @@ const AppTableBody = () => {
               {types !== "appointment" && (
                 <TableCell>
                   <Button
-                    className={classess.mainButton}
+                    className={classes.mainButton}
                     onClick={() => {
                       handleEdit(row, types, dispatch, setShowModal);
                     }}
@@ -50,7 +50,7 @@ const AppTableBody = () => {
               {types === "patient" && (
                 <TableCell>
                   <Button
-                    className={classess.mainButton}
+                    className={classes.mainButton}
                     onClick={() => {
                       handleView(row?.id, dispatch, setShowModal);
                     }}

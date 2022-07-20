@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { DropzoneArea } from "react-mui-dropzone";
+import { memo } from "react";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Grid, TextField } from "@mui/material";
 import { createPatientProps, patientProps } from "./types";
@@ -18,8 +17,6 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
   const dispatch = useAppDispatch();
   //initial state of the form
   const initialState: patientProps = {
-    // name: edit ? (doctor?.name ? doctor?.name : "") : "",
-    // dobDate: edit ? (doctor?.dobDate ? doctor?.dobDate : null) : null,
     name: edit ? (patient?.name ? patient?.name : "") : "",
     dobDate: edit ? (patient?.dobDate ? patient?.dobDate : "") : "",
     age: edit ? (patient?.age ? patient?.age : "") : "",
@@ -39,6 +36,7 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
     sex: Yup.string().required("Required"),
     location: Yup.string().required("Required"),
   });
+  // function to submit form values
   const onSubmit = (values: patientProps) => {
     if (edit) {
       // dispatching update action
@@ -158,4 +156,4 @@ const CreatePatient = ({ setShowModal }: createPatientProps) => {
   );
 };
 
-export default React.memo(CreatePatient);
+export default memo(CreatePatient);
