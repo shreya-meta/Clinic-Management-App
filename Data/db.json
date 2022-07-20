@@ -235,8 +235,8 @@
         "id": 1,
         "addedPicture": {}
       },
-      "feedback": "testsd",
-      "isComplete": false,
+      "feedback": "testsdddnd,",
+      "isComplete": true,
       "patientDisplay": "shreya",
       "doctorDisplay": "Ram  Thapa",
       "id": 4
@@ -273,7 +273,7 @@
         "id": 1,
         "addedPicture": {}
       },
-      "feedback": "",
+      "feedback": "mmmm",
       "isComplete": false,
       "patientDisplay": "Rita",
       "doctorDisplay": "Ram  Thapa",

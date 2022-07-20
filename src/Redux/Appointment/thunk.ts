@@ -5,20 +5,37 @@ import * as API from "./api";
 import * as action from "./AppointmentSlice";
 // Asynchronous thunk actions
 // get appointments
-export const getAppointments = () => async (dispatch: AppDispatch) => {
-  try {
-    //dispatch loading action
-    dispatch(action.loadingAppointmentAction());
-    //fetch api
-    const { data } = await API.getAppointment();
-    // dispatch success action
-    dispatch(action.getAppointmentSuccessAction(data));
-  } catch (error) {
-    // dispatch fail action
-    dispatch(action.getAppointmentFailAction());
-    dispatch(alertErrorAction("Failed To Get Data"));
-  }
-};
+export const getAppointments =
+  (id?: number) => async (dispatch: AppDispatch) => {
+    try {
+      //dispatch loading action
+      dispatch(action.loadingAppointmentAction());
+      //fetch api
+      const { data } = await API.getAppointment();
+      // dispatch success action
+      dispatch(action.getAppointmentSuccessAction({ data, id }));
+    } catch (error) {
+      // dispatch fail action
+      dispatch(action.getAppointmentFailAction());
+      dispatch(alertErrorAction("Failed To Get Data"));
+    }
+  };
+// export const FilterAppointmentByDoctor =
+//   ({ id: number }) =>
+//   async (dispatch: AppDispatch) => {
+//     try {
+//       //dispatch loading action
+//       dispatch(action.loadingAppointmentAction());
+//       //fetch api
+//       const { data } = await API.getAppointment();
+//       // dispatch success action
+//       dispatch(action.getAppointmentSuccessAction(data));
+//     } catch (error) {
+//       // dispatch fail action
+//       dispatch(action.getAppointmentFailAction());
+//       dispatch(alertErrorAction("Failed To Get Data"));
+//     }
+//   };
 // create doctors
 export const createAppointment =
   (values: appointmentProps) => async (dispatch: AppDispatch) => {
@@ -35,13 +52,14 @@ export const createAppointment =
   };
 // update doctors
 export const updateAppointment =
-  (values: appointmentProps, id: number) => async (dispatch: AppDispatch) => {
+  (values: appointmentProps, id: number, loggedUserId?: number) =>
+  async (dispatch: AppDispatch) => {
     try {
       const body = values;
       dispatch(action.loadingCreateAppointmentAction());
       await API.updateAppointment(body, id);
       dispatch(alertSuccessAction("Appointment Updated Successfully"));
-      dispatch(getAppointments());
+      dispatch(getAppointments(loggedUserId));
       dispatch(action.updateAppointmentSuccessAction());
     } catch (error) {
       dispatch(action.updateAppointmentFailAction());

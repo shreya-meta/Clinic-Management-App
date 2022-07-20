@@ -5,11 +5,13 @@ import AppTable from "../../Components/Table/AppTable";
 import { filterAppointmentsByDateAction } from "../../Redux/Appointment/AppointmentSlice";
 import { appointmentSelector } from "../../Redux/Appointment/selector";
 import { getAppointments } from "../../Redux/Appointment/thunk";
+import { loginSelector } from "../../Redux/Login/selector";
 import { useAppDispatch, useAppSelector } from "../../Utils/appHooks";
 import { appointmentColumn, appointmentProps } from "./types";
 const Appointment = () => {
   const { appointments } = useAppSelector(appointmentSelector);
   const [nextAppointment, setNextAppointment] = useState(false);
+  const { loggedUser } = useAppSelector(loginSelector);
   const globalClassess = useGlobalStyles();
   const dispatch = useAppDispatch();
   // get today date
@@ -27,7 +29,7 @@ const Appointment = () => {
   useEffect(() => {
     nextAppointment
       ? dispatch(filterAppointmentsByDateAction(filterDataByDates()))
-      : dispatch(getAppointments());
+      : dispatch(getAppointments(loggedUser?.id && loggedUser?.id));
   }, [nextAppointment]);
   const handleFilterByDate = () => {
     setNextAppointment((prev) => !prev);

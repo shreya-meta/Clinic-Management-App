@@ -11,6 +11,7 @@ import Appointment from "./Appointment";
 import { appointmentProps } from "./types";
 import { appointmentSelector } from "../../Redux/Appointment/selector";
 import { getAppointments } from "../../Redux/Appointment/thunk";
+import { loginSelector } from "../../Redux/Login/selector";
 const Modal = lazy(() => import("../../Components/Modal/Modal"));
 const AppointmentListing = () => {
   // state for opening and closing Modal
@@ -26,6 +27,8 @@ const AppointmentListing = () => {
   const dispatch = useAppDispatch();
   const { appointments, loadingAppointment, edit } =
     useAppSelector(appointmentSelector);
+  const { loggedUser } = useAppSelector(loginSelector);
+
   //state for searching
   const [search, setSearch] = useState("");
   const types = "appointment";
@@ -49,12 +52,18 @@ const AppointmentListing = () => {
   // dispatch our thunk when component first mounts
   useEffect(() => {
     if (search === "") {
-      dispatch(getAppointments());
+      // loggedUser?.id
+      //   ? dispatch(FilterAppointmentByDoctor(loggedUser?.id))
+      dispatch(getAppointments(loggedUser?.id && loggedUser?.id));
     } else {
       // filter data that matches searched values with name
       let searchedValue = appointments.filter((row: appointmentProps) => {
-        const { slot } = row;
-        return slot.toLowerCase().includes(search.toLowerCase());
+        const { slot, doctorDisplay, patientDisplay } = row;
+        return (
+          slot?.toLowerCase().includes(search.toLowerCase()) ||
+          doctorDisplay?.toLowerCase().includes(search.toLowerCase()) ||
+          patientDisplay?.toLowerCase().includes(search.toLowerCase())
+        );
       });
       dispatch(getSearchedDataSuccessAction(searchedValue));
     }

@@ -29,6 +29,8 @@ export interface appointmentProps {
   doctor: doctorProps | null;
   feedback: string;
   isComplete: boolean;
+  doctorDisplay?: string;
+  patientDisplay?: string;
 }
 export interface createAppointmentProps {
   setShowModal: Dispatch<React.SetStateAction<boolean>>;

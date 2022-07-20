@@ -24,7 +24,7 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
   const { edit, appointment, loading } = useAppSelector(appointmentSelector);
   const { doctors } = useAppSelector(doctorsSelector);
   const { patients } = useAppSelector(patientSelector);
-  const { userRole } = useAppSelector(loginSelector);
+  const { userRole, loggedUser } = useAppSelector(loginSelector);
 
   // props
   const dispatch = useAppDispatch();
@@ -63,7 +63,8 @@ const CreateAppointment = ({ setShowModal }: createAppointmentProps) => {
             patientDisplay: patient?.name,
             doctorDisplay: doctor?.name,
           },
-          appointment?.id!
+          appointment?.id!,
+          loggedUser?.id && loggedUser?.id
         )
       );
     } else {

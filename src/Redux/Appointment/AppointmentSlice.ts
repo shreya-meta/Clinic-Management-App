@@ -29,7 +29,12 @@ const AppointmentSlice = createSlice({
       state.loading = true;
     },
     getAppointmentSuccessAction: (state, { payload }) => {
-      state.appointments = payload;
+      state.appointments = payload?.id
+        ? payload.data?.filter(
+            (appointment: appointmentProps) =>
+              appointment?.doctor?.id === payload?.id
+          )
+        : payload.data;
       state.loadingAppointment = false;
     },
     getAppointmentFailAction: (state) => {
